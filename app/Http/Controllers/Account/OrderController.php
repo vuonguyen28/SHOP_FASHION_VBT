@@ -596,7 +596,7 @@ class OrderController extends Controller
     public function FindOrderDetail_WalkInCustomers(Request $request)
     {
         $check = 1;
-        $orders = Order::where('RecipientPhone',$request->Phone)->get();
+        $orders = Order::where('RecipientPhone',$request->Phone)->take(1)->get();
         $orderDetail = OrderDetails::where('MaDonHang',$request->ID_ORDER)->get();
         // dd($orderDetail);
         return view('account.Order.checkOder_WalkInCustomers', [

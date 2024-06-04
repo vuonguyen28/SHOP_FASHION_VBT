@@ -240,4 +240,86 @@
 .form__bill .form__bill--content .form__bill--detail .location__phone h6 i {
   color: green;
   font-size: 15px;
+}
+
+.form__checkOrder {
+  background-color: #E3AD20;
+}
+.form__checkOrder .title__checkOrder {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 5px;
+  color: #fff;
+}
+.form__checkOrder p {
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  font-style: italic;
+}
+.form__checkOrder form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.form__checkOrder form input {
+  width: 50%;
+  padding: 5px;
+  font-size: 16px;
+}
+.form__checkOrder form button {
+  border: none;
+  padding: 7px;
+  border-radius: 0 10px 10px 0;
+}
+.form__checkOrder form button i {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.form__Order--content {
+  background-color: #fff;
+  padding: 10px;
+}
+.form__Order--content .list__ordercheck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 1px black;
+}
+.form__Order--content .list__ordercheck .bx-package {
+  font-size: 40px;
+}
+.form__Order--content .list__ordercheck p {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 15px;
+}
+.form__Order--content .list__ordercheck h6 {
+  font-size: 14px;
+}
+.form__Order--content .list__ordercheck .order__btn--seeDetails button {
+  border: none;
+  background-color: rgb(38, 216, 38);
+  font-weight: bold;
+  color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+}
+.form__Order--content .form__details--click {
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+}
+.form__Order--content .form__details--click p {
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.form__Order--content .form__details--click h6 {
+  font-size: 14px;
 }/*# sourceMappingURL=style_bill.css.map */

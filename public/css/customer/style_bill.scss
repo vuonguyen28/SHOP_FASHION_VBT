@@ -115,16 +115,17 @@
     }
 
     .form__bill--content {
-        
+
         margin-left: 1px;
 
-        .form__bill--main{
+        .form__bill--main {
             margin-top: 10px;
             border: 1px solid black;
             display: flex;
             align-items: center;
             box-shadow: 1px 1px 2px black;
-            p{
+
+            p {
                 font-weight: bold;
                 text-decoration: underline;
             }
@@ -302,6 +303,104 @@
             }
         }
 
+
+    }
+}
+
+.form__checkOrder {
+    background-color: #E3AD20;
+
+    .title__checkOrder {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+        padding: 5px;
+        color: #fff;
+    }
+
+    p {
+        text-align: center;
+        font-size: 15px;
+        color: #fff;
+        font-style: italic;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+
+        input {
+            width: 50%;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            border: none;
+            padding: 7px;
+            border-radius: 0 10px 10px 0;
+
+            i {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.form__Order--content {
+    background-color: #fff;
+    padding: 10px;
+
+
+    .list__ordercheck {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 1px 1px 1px black;
+
+        .bx-package{
+            font-size: 40px;
+        }
+
+        p{
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 15px;
+        }
+
+        h6{
+            font-size: 14px;
+        }
+
+        .order__btn--seeDetails{
+            button{
+                border: none;
+                background-color: rgb(38, 216, 38);
+                font-weight: bold;
+                color: #fff;
+                padding: 8px;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .form__details--click{
+        border: 1px solid black;
+        box-shadow: 1px 1px 1px black;
+        p{
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        h6{
+            font-size: 14px;
+        }
 
     }
 }

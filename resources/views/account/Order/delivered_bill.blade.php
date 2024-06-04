@@ -74,60 +74,13 @@
                 <div class="col-md-2">
                     <p>Trạng thái đơn hàng:</p>
                     <h6>{{ $item->TrangThaiDonHang }}</h6>
-                    <button type="button" class="btn" data-bs-toggle="modal"
-                        data-bs-target="#updateAddressModal{{ $item->MaDonHang }}">
-                        cập nhật địa chỉ
-                    </button>
-                    <h6>{{ $item->DiaChiGiaoHang }}</h6>
+
+                    <h6>Đại chỉ:{{ $item->DiaChiGiaoHang }}</h6>
                     <p>SĐT nhận hàng: </p>
                     <h6>{{ $item->RecipientPhone }}</h6>
                 </div>
 
-                {{-- Update Address Modal --}}
-                <div class="modal" id="updateAddressModal{{ $item->MaDonHang }}">
-                    <div class="modal-dialog">
-                        <form action="{{ route('Order.UpdateAdressAndPhone') }}" method="POST">
-                            @csrf
-                            <div class="modal-content">
 
-                                {{-- Modal Header --}}
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Cập nhật địa chỉ</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                    <input type="hidden" name="sumTotalMoney" value="">
-
-                                    <div class="form-group">
-                                        <label for="MaDonHang{{ $item->MaDonHang }}">Mã Đơn Hàng</label>
-                                        <input readonly value="{{ $item->MaDonHang }}" name="MaDonHang" type="text"
-                                            class="form-control" id="phone{{ $item->MaDonHang }}" placeholder="text">
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="phone{{ $item->MaDonHang }}">Phone</label>
-                                        <input required value="{{ $item->RecipientPhone }}" name="phone" type="phone"
-                                            class="form-control" id="phone{{ $item->MaDonHang }}" placeholder="Phone">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="address{{ $item->MaDonHang }}">Địa chỉ</label>
-                                        <input required value="{{ $item->DiaChiGiaoHang }}" name="Address" type="text"
-                                            class="form-control" id="address{{ $item->MaDonHang }}" placeholder="Địa chỉ">
-                                    </div>
-                                </div>
-
-                                {{-- Modal Footer --}}
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-danger">Cập nhật địa chỉ</button>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
                 {{-- Button to see details --}}
                 <div class="col-md-1">
@@ -140,10 +93,10 @@
                         <br>
                         <form method="POST" action="{{ route('Order.CancelOrder') }}">
                             @csrf
-                            <input name="MaDonHang" hidden value="{{  $item->MaDonHang  }}">
+                            <input name="MaDonHang" hidden value="{{ $item->MaDonHang }}">
                             <button class="btn_cancel"><a>Trả Hàng</a></button>
                         </form>
-                        
+
                     </div>
                 </div>
 
@@ -169,6 +122,7 @@
                             <div class="col-md-2">
                                 <div class="bill__info--col1">
                                     <h4>{{ $item->ProductDetails->Product->TenSP }}</h4>
+                                    <h4>{{ $item->ProductDetails->MaChiTiet }}</h4>
                                     <p>Size:{{ $item->ProductDetails->Size->TenKichThuoc }}</p>
                                     <p>Color: {{ $item->ProductDetails->Color->TenMau }}</p>
                                     <p>Quantity: {{ $item->SoLuong }}</p>
@@ -196,8 +150,48 @@
                             {{-- state --}}
                             <div class="col-md-1">
                                 <div class="state_delive">
-                                    <i class='bx bx-loader'></i>
-                                    {{-- <p>{{ $item->TrangThaiDonHang }}</p> --}}
+                                    <button type="button" class="btn" data-bs-toggle="modal"
+                                        data-bs-target="#updateAddressModal{{ $item->ProductDetails->MaChiTiet}}">
+                                        feedback
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            {{-- Update Address Modal --}}
+                            <div class="modal" id="updateAddressModal{{ $item->ProductDetails->MaChiTiet }}">
+                                <div class="modal-dialog">
+                                    <form action="{{ route('Order.UpdateAdressAndPhone') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-content">
+
+                                            {{-- Modal Header --}}
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Cập nhật địa chỉ</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <input type="hidden" name="sumTotalMoney" value="">
+
+                                                <div class="form-group">
+                                                    <label for="MaDonHang{{ $item->ProductDetails->MaChiTiet }}">Mã Đơn Hàng</label>
+                                                    <input readonly value="{{ $item->ProductDetails->MaChiTiet }}" name="MaDonHang"
+                                                        type="text" class="form-control"
+                                                        id="phone{{ $item->ProductDetails->MaChiTiet }}" placeholder="text">
+                                                </div>
+
+
+                                               
+                                            </div>
+
+                                            {{-- Modal Footer --}}
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Cập nhật địa chỉ</button>
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
