@@ -1,5 +1,48 @@
+.btn__clearAll--cart {
+  display: flex;
+  align-items: center;
+}
+.btn__clearAll--cart form button {
+  margin: 10px 0 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+.btn__clearAll--cart form button i {
+  font-size: 20px;
+  color: #fff;
+}
+
 .form__cart {
-  margin: 50px;
+  margin: 10px 50px 50px 50px;
+}
+.form__cart .bg__emptyCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form__cart .bg__emptyCart img {
+  width: 300px;
+  height: 300px;
+}
+.form__cart .bg__emptyCart button {
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, rgb(231, 39, 39), rgb(232, 52, 52), rgb(222, 141, 90), rgba(247, 111, 0, 0.879), red);
+  display: inline;
+  animation: linearAnimated 2s linear infinite;
+}
+.form__cart .bg__emptyCart button a {
+  text-decoration: none;
+  padding: 8px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+.form__cart .bg__emptyCart button:hover {
+  box-shadow: 2px 2px 2px rgb(61, 61, 61);
 }
 
 .cart__details {
@@ -16,6 +59,18 @@
   font-weight: bold;
   font-size: 20px;
   text-decoration: underline;
+}
+.cart__details .cart__details--size p {
+  font-weight: bold;
+}
+.cart__details .cart__details--price p {
+  font-weight: bold;
+}
+.cart__details .cart__details--price p span {
+  font-size: 13px;
+}
+.cart__details .cart__details--color p {
+  font-weight: bold;
 }
 .cart__details .cart__details--btn-delete {
   transition: all 0.3s ease;
@@ -48,6 +103,7 @@
 .cart__details .cart__details--quantity input {
   width: 40%;
   margin: 10px;
+  text-align: center;
 }
 .cart__details .cart__details--quantity button {
   display: flex;
@@ -67,7 +123,9 @@
   font-size: 20px;
 }
 .cart__details .cart__details--total p {
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: red;
 }
 
 .form__payment {
@@ -85,9 +143,12 @@
 }
 
 .form__voucher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #fff;
-  margin: 10px 0 10px 20px;
-  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.5);
+  border: 1px solid black;
   height: auto;
   padding: 10px;
 }
@@ -109,15 +170,43 @@
   transform: scale(1.1);
   box-shadow: 3px 3px 3px 3px rgba(6, 6, 6, 0.5);
 }
+.form__voucher .form__voucher--info {
+  border: 1px solid black;
+  margin: 10px;
+  width: 80%;
+  box-shadow: 2px 2px 2px rgb(84, 84, 84);
+}
+.form__voucher .form__voucher--info ul {
+  list-style: none;
+}
+.form__voucher .btn__delete--voucher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form__voucher .btn__delete--voucher button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  border-radius: 10px;
+  padding: 5px;
+}
+.form__voucher .btn__delete--voucher button i {
+  color: #fff;
+  font-size: 15px;
+}
 
 .form__confirm {
   background-color: #fff;
-  margin: 10px 0 10px 20px;
-  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.5);
+  border: 1px solid black;
   height: auto;
   padding: 10px;
   justify-content: center;
   align-items: center;
+}
+.form__confirm .total__bill--choose p {
+  font-weight: bold;
 }
 .form__confirm p {
   font-size: 13px;
@@ -137,7 +226,9 @@
   margin-left: 10px;
 }
 .form__confirm button {
-  font-size: 15px;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -153,8 +244,7 @@
 
 .form__deliver {
   background-color: #fff;
-  margin: 10px 0 10px 20px;
-  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.5);
+  border: 1px solid black;
   height: auto;
   padding: 10px;
 }
@@ -168,8 +258,7 @@
 
 .form__location {
   background-color: #fff;
-  margin: 10px 0 10px 20px;
-  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.5);
+  border: 1px solid black;
   height: auto;
   padding: 10px;
 }
@@ -177,15 +266,53 @@
   font-size: 13px;
   font-weight: bold;
 }
-.form__location .form__location--locate p {
+
+.form__location--locate input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
   font-size: 13px;
 }
-.form__location .form__location--locate button {
-  border: none;
-  font-size: 13px;
+
+.btn__update--info {
+  margin: 10px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn__update--info a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 5px;
+  color: #fff;
   font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(0, 60, 255);
+  font-size: 15px;
 }
-.form__location .form__location--locate button i {
+.btn__update--info a i {
+  color: #fff;
   font-size: 20px;
-  color: red;
+}
+
+.btn_changeInfo a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: none;
+  font-size: 15px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: rgb(0, 60, 255);
+  color: #fff;
+  border-radius: 10px;
+}
+
+@keyframes linearAnimated {
+  to {
+    background-position-x: 161px;
+  }
 }/*# sourceMappingURL=style_cart.css.map */

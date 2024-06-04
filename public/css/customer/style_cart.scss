@@ -1,7 +1,66 @@
+.btn__clearAll--cart {
+    display: flex;
+    align-items: center;
+
+    form {
+        button {
+            margin: 10px 0 0 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+
+            i {
+                font-size: 20px;
+                color: #fff;
+            }
+        }
+    }
+}
+
 .form__cart {
     // margin: 30px 100px 30px 100px;
-    margin: 50px;
+    margin: 10px 50px 50px 50px;
+
     // background-color: #fff;
+    .bg__emptyCart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        button {
+            border: none;
+            // background-color: rgb(246, 96, 15);
+            border-radius: 10px;
+
+            background: linear-gradient(45deg, rgb(231, 39, 39), rgb(232, 52, 52), rgb(222, 141, 90), rgba(247, 111, 0, 0.879), red);
+            // background-clip: text;
+            display: inline;
+            // color: transparent;
+            animation: linearAnimated 2s linear infinite;
+
+            a {
+                text-decoration: none;
+                padding: 8px;
+                color: #fff;
+                font-size: 20px;
+                font-weight: bold;
+
+
+
+            }
+        }
+
+        button:hover {
+            box-shadow: 2px 2px 2px rgb(61, 61, 61);
+        }
+    }
 }
 
 //style shopping cart
@@ -26,6 +85,28 @@
             font-weight: bold;
             font-size: 20px;
             text-decoration: underline;
+        }
+    }
+
+    .cart__details--size {
+        p {
+            font-weight: bold;
+        }
+    }
+
+    .cart__details--price {
+        p {
+            font-weight: bold;
+
+            span {
+                font-size: 13px;
+            }
+        }
+    }
+
+    .cart__details--color {
+        p {
+            font-weight: bold;
         }
     }
 
@@ -62,9 +143,11 @@
         justify-content: center;
         align-items: center;
 
+
         input {
             width: 40%;
             margin: 10px;
+            text-align: center;
         }
 
         button {
@@ -88,7 +171,9 @@
         }
 
         p {
-            font-size: 20px;
+            font-size: 15px;
+            font-weight: bold;
+            color: red;
         }
     }
 }
@@ -111,9 +196,12 @@
 }
 
 .form__voucher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: #fff;
-    margin: 10px 0 10px 20px;
-    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    border: 1px solid black;
     height: auto;
     padding: 10px;
 
@@ -138,17 +226,55 @@
         transform: scale(1.1);
         box-shadow: 3px 3px 3px 3px rgb(6, 6, 6, 0.5);
     }
+
+    .form__voucher--info {
+        border: 1px solid black;
+        margin: 10px;
+        width: 80%;
+        box-shadow: 2px 2px 2px rgb(84, 84, 84);
+
+        ul {
+            list-style: none;
+
+            li {}
+        }
+    }
+
+    .btn__delete--voucher {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            border-radius: 10px;
+            padding: 5px;
+
+            i {
+                color: #fff;
+                font-size: 15px;
+            }
+        }
+    }
 }
 
 // form xác nhận đặt
 .form__confirm {
     background-color: #fff;
-    margin: 10px 0 10px 20px;
-    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    border: 1px solid black;
     height: auto;
     padding: 10px;
     justify-content: center;
     align-items: center;
+
+    .total__bill--choose {
+        p {
+            font-weight: bold;
+        }
+    }
 
     p {
         font-size: 13px;
@@ -175,7 +301,9 @@
     }
 
     button {
-        font-size: 15px;
+        padding: 8px;
+        border-radius: 10px;
+        font-size: 12px;
         font-weight: bold;
         margin-top: 20px;
         margin-bottom: 10px;
@@ -195,8 +323,7 @@
 //thông tin ngày đặt ngày giao hàng dự kiến
 .form__deliver {
     background-color: #fff;
-    margin: 10px 0 10px 20px;
-    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    border: 1px solid black;
     height: auto;
     padding: 10px;
 
@@ -207,8 +334,8 @@
         }
     }
 
-    .form__deliver--date{
-        p{
+    .form__deliver--date {
+        p {
             font-size: 13px;
         }
     }
@@ -216,33 +343,77 @@
 }
 
 //thông tin địa chỉ nhận hàng
-.form__location{
+.form__location {
     background-color: #fff;
-    margin: 10px 0 10px 20px;
-    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    border: 1px solid black;
     height: auto;
     padding: 10px;
 
-    .form__location--title{
+    .form__location--title {
         p {
             font-size: 13px;
             font-weight: bold;
         }
     }
 
-    .form__location--locate{
-        p{
-            font-size: 13px;
-        }
-        button{
-            border: none;
-            font-size: 13px;
-            font-weight: bold;
-            i{
-                font-size: 20px;
-                color: red;
-            }
+
+
+}
+
+.form__location--locate {
+    input {
+        width: 100%;
+        margin-top: 10px;
+        padding: 5px;
+        font-size: 13px;
+    }
+}
+
+.btn__update--info {
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        padding: 5px;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 10px;
+        background-color: rgb(0, 60, 255);
+        font-size: 15px;
+
+        i {
+            color: #fff;
+            font-size: 20px;
         }
     }
+}
 
+
+.btn_changeInfo {
+
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        border: none;
+        font-size: 15px;
+        padding: 5px;
+        font-weight: bold;
+        background-color: rgb(0, 60, 255);
+        color: #fff;
+        border-radius: 10px;
+    }
+}
+
+@keyframes linearAnimated {
+    to {
+        background-position-x: 161px;
+    }
 }
