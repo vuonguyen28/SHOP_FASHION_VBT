@@ -19,6 +19,8 @@ use App\Http\Controllers\Account\OrderController;
 use App\Http\Controllers\Account\VouchersController;
 use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\Account\BillController;
+use App\Http\Controllers\Account\FeedbackController;
+
 
 
 
@@ -365,3 +367,7 @@ Route::post('/bill/ShowOrderedBill', [BillController::class, 'ShowOrdered_Detail
 Route::post('/bill/CheckYourOrder', [BillController::class, 'CheckYourOrder_Detail_Bill'])->name('bill.CheckYourOrder_Detail_Bill');
 Route::post('/bill/ShowDeliveredBill', [BillController::class, 'ShowDeliveredBill_Detail_Bill'])->name('bill.ShowDeliveredBill_Detail_Bill');
 
+
+
+// FEEDBACK TO ORDER DETAIL 
+Route::post('/feedback/FeedbackToOrder', [FeedbackController::class, 'FeedbackToOrderDetail'])->name('feedback.FeedbackToOrderDetail');

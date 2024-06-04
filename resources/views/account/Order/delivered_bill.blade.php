@@ -122,7 +122,6 @@
                             <div class="col-md-2">
                                 <div class="bill__info--col1">
                                     <h4>{{ $item->ProductDetails->Product->TenSP }}</h4>
-                                    <h4>{{ $item->ProductDetails->MaChiTiet }}</h4>
                                     <p>Size:{{ $item->ProductDetails->Size->TenKichThuoc }}</p>
                                     <p>Color: {{ $item->ProductDetails->Color->TenMau }}</p>
                                     <p>Quantity: {{ $item->SoLuong }}</p>
@@ -151,7 +150,7 @@
                             <div class="col-md-1">
                                 <div class="state_delive">
                                     <button type="button" class="btn" data-bs-toggle="modal"
-                                        data-bs-target="#updateAddressModal{{ $item->ProductDetails->MaChiTiet}}">
+                                        data-bs-target="#updateAddressModal{{ $item->MaChiTiet }}">
                                         feedback
                                     </button>
                                 </div>
@@ -159,15 +158,15 @@
 
 
                             {{-- Update Address Modal --}}
-                            <div class="modal" id="updateAddressModal{{ $item->ProductDetails->MaChiTiet }}">
+                            <div class="modal" id="updateAddressModal{{ $item->MaChiTiet }}">
                                 <div class="modal-dialog">
-                                    <form action="{{ route('Order.UpdateAdressAndPhone') }}" method="POST">
+                                    <form action="{{ route('feedback.FeedbackToOrderDetail') }}" method="POST">
                                         @csrf
                                         <div class="modal-content">
 
                                             {{-- Modal Header --}}
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Cập nhật địa chỉ</h4>
+                                                <h4 class="modal-title">FeedBack</h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
 
@@ -175,19 +174,27 @@
                                                 <input type="hidden" name="sumTotalMoney" value="">
 
                                                 <div class="form-group">
-                                                    <label for="MaDonHang{{ $item->ProductDetails->MaChiTiet }}">Mã Đơn Hàng</label>
-                                                    <input readonly value="{{ $item->ProductDetails->MaChiTiet }}" name="MaDonHang"
+                                                    <label for="MaDonHang{{ $item->MaChiTiet }}">Mã Đơn Hàng</label>
+                                                    <input readonly value="{{ $item->MaChiTiet }}" name="MaChiTietDonHang"
                                                         type="text" class="form-control"
-                                                        id="phone{{ $item->ProductDetails->MaChiTiet }}" placeholder="text">
+                                                        id="phone{{ $item->MaChiTiet }}" placeholder="text">
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label >Nội Dung FeedBack</label>
+                                                    <input value="" name="NoiDung" placeholder="text feedback">
+                                                </div>
 
+                                                <div class="form-group">
+                                                    <label >Đánh Giá </label>
+                                                    <input type="number" min="1" max="5" name="DanhGia" placeholder="Đánh giá">
+                                                </div>
                                                
                                             </div>
 
                                             {{-- Modal Footer --}}
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger">Cập nhật địa chỉ</button>
+                                                <button type="submit" class="btn btn-danger">FEEDBACK</button>
                                             </div>
 
                                         </div>
