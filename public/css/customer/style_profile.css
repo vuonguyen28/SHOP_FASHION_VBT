@@ -1,0 +1,56 @@
+.form_profile {
+  margin: 20px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+}
+.form_profile .form__edit--profile-avatar .profile__avatar img {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.form_profile .form__edit--profile-avatar .profile__btn--choose-avatar input {
+  display: none;
+}
+.form_profile .form__edit--profile-avatar .profile__btn--choose-avatar label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 100px;
+  border-radius: 10px;
+  border: 1px dashed black;
+  margin: 20px;
+  cursor: pointer;
+}
+.form_profile .form__edit--profile-avatar .profile__btn--choose-avatar label:hover {
+  color: red;
+  border: 1px dashed red;
+}
+.form_profile .form__edit--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.form_profile .form__edit--btn button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  background-color: aqua;
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.form_profile .form__edit--btn button i {
+  font-size: 20px;
+}
+.form_profile .form__edit--btn button:hover {
+  box-shadow: 1px 1px 2px black;
+}/*# sourceMappingURL=style_profile.css.map */

@@ -1,0 +1,246 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Imports\ProductImport;
+use App\Models\Product;
+use App\Models\ProductDetails;
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Supplier;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+class ProductController extends Controller
+{
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $product = Product::where('TenSP', 'like', "%$keyword%")->get();
+
+
+        // return view('admin.product.index', compact('product'))->with('i', (request()->input('page', 1) - 1) * $perPage)
+        //     ->with('perPage', $perPage);
+    }
+
+    // public function index()
+    // {
+    //     $product = Product::all();
+    //     return view('admin.product.index', compact('product'));
+    // }
+    public function index(Request $request)
+    {
+        // $product = Product::paginate(10);
+        // return view('admin.product.index', compact('product'))->with('i', (request()->input('page', 1) -1) * 10);
+        // mặc định là 10
+        $perPage = $request->input('per_page', 10);
+
+        // Lấy danh sách sản phẩm + phân trang
+        $product = Product::paginate($perPage);
+
+        // Trả về view với danh sách sản phẩm và giá trị per_page
+        return view('admin.product.index', compact('product'))
+            ->with('i', (request()->input('page', 1) - 1) * $perPage)
+            ->with('perPage', $perPage);
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $categories = Category::all();
+        $supplier = Supplier::all();
+        return view('admin.product.create', compact('categories', 'supplier'));
+    }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // Validate dữ liệu sản phẩm
+        $validatedData = $request->validate([
+            'TenSP' => 'required|string',
+            'Gia' => 'required|numeric',
+            'PhanTramGiamGia' => 'nullable|numeric',
+            'MoTa' => 'required|string',
+            'MaDanhMuc' => 'required|int',
+            'MaNhaCungCap' => 'required|int',
+            'TrinhTrang' => 'required|string',
+        ]);
+
+        // Tạo sản phẩm mới
+        $product = Product::create($validatedData);
+
+
+        //import product from excel
+
+
+
+        // Lưu hình ảnh
+        if ($request->hasFile('hinhanh')) {
+            foreach ($request->file('hinhanh') as $file) {
+                // Lưu hình ảnh vào thư mục public/product
+                $fileNameToStore = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('product'), $fileNameToStore);
+
+                // Tạo bản ghi cho hình ảnh trong cơ sở dữ liệu và liên kết với sản phẩm
+                Image::create([
+                    'MaSP' => $product->MaSP,
+                    'hinhanh' => $fileNameToStore,
+                ]);
+            }
+        }
+
+        // Chuyển hướng về trang danh sách sản phẩm với thông báo thành công
+        return redirect()->route('product.index')->with('success', 'Product created successfully.');
+    }
+
+
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function showImage(string $id)
+    {
+        //
+    }
+
+    public function show(string $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $productDetails = ProductDetails::where('MaSP', $id)->get();
+
+        return view('admin.product.show', compact('product', 'productDetails'));
+    }
+    public function getProductImages($maSP)
+    {
+        $product = Product::find($maSP);
+        if (!$product) {
+            abort(404);
+        }
+
+        $images = $product->images;
+
+        return view('product.images', ['product' => $product, 'images' => $images]);
+    }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $product = Product::where("MaSP", $id)->first();
+        if (!isset($product)) {
+            abort(404);
+        }
+
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+
+        return view('admin.product.edit', ['product' => $product, 'category' => $categories, 'supplier' => $suppliers]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+
+        $product = Product::findOrFail($id);
+
+        // Validate dữ liệu
+        $validatedData = $request->validate([
+            'TenSP' => 'required|string',
+            'Gia' => 'required|numeric',
+            'PhanTramGiamGia' => 'nullable|numeric',
+            'MoTa' => 'required|string',
+            'MaDanhMuc' => 'required|int',
+            'MaNhaCungCap' => 'required|int',
+            'TrinhTrang' => 'required|string',
+        ]);
+
+        // Cập nhật thông tin khách hàng
+        $product->update($validatedData);
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
+    }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $product = Product::findOrFail($id);
+        $images = Image::where('MaSP', $id)->get();
+        foreach ($images as $image) {
+            $filePath = public_path('product') . '/' . $image->hinhanh;
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $image->delete();
+        }
+        $product->delete();
+        return redirect()->route('product.index')->with('success', 'Product and associated images deleted successfully.');
+    }
+    public function destroy_all(Request $request)
+    {
+        $selectedIds = $request->input('selectedIds');
+
+        if (!empty($selectedIds)) {
+            foreach ($selectedIds as $id) {
+                $product = Product::findOrFail($id);
+
+                if ($product) {
+                    $images = Image::where('MaSP', $id)->get();
+                    foreach ($images as $image) {
+                        $filePath = public_path('product') . '/' . $image->hinhanh;
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
+                        $image->delete();
+                    }
+                    $product->delete();
+                }
+            }
+            return response()->json(['success' => true, 'message' => 'Product deletion was successful .']);
+        } else {
+            return response()->json(['success' => false, 'message' => '产品删除成功.'], 400);
+        }
+    }
+
+    /**
+     * import data form excel
+     */
+
+    public function import()
+    {
+        return view('admin.product.import');
+    }
+    public function importFromExcel(Request $request)
+    {
+        // Kiểm tra nếu có file import được gửi lên
+        if ($request->hasFile('import_file')) {
+            // Validate file import
+            $request->validate([
+                'import_file' => [
+                    'required',
+                    'file',
+                    'mimes:xlsx,xls',
+                ],
+            ]);
+
+            // Thực hiện import dữ liệu từ file Excel
+            Excel::import(new ProductImport, $request->file('import_file'));
+
+            // Chuyển hướng về trang danh sách sản phẩm sau khi import thành công
+            return redirect()->route('product.index')->with('success', 'Import file successfully.');
+        } else {
+            // Nếu không có file import được gửi lên, chuyển hướng về trang trước và hiển thị thông báo lỗi
+            return redirect()->back()->with('error', 'Please choose a file to import.');
+        }
+    }
+}

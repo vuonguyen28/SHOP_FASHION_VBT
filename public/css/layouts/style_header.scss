@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
+
+
+$pinkds-color: #FF4493;
+$greends-color: #0D9993;
+
+body {
+    height: 100vh;
+    background-color: #000;
+    
+    background-size: cover;
+    background-position: center;
+}
+
+
+.header{
+    position: relative; /*Vị trí tương đối - đặt dựa trên vị trí ban đầu*/
+    padding: 0 2rem;
+    background-color: rgba(0, 0, 0, 0.1); /* Màu nền trong suốt 10% */
+    backdrop-filter: blur(10px); /* hiệu ứng làm mờ cho nền */
+    z-index: 999;
+}
+
+.header__navbar{
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header__navbar--links-nav{
+        display: flex;
+        gap: 2rem;
+    }
+
+    .header__navbar--toggle-btn{
+        font-size: 2rem;
+        color: #000;
+        cursor: pointer;
+        display: none; /*hide icon bars*/
+    }
+}
+
+.header__navbar--logo img{
+    width: 80px;
+    height: 80px;
+}
+
+//scss con của header__navbar--links-nav
+.header__navbar--links-nav{
+    li{
+        list-style: none;
+    }
+
+    a{
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        font-size: 2rem;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+        align-items: center;
+        text-align: center;
+    }
+
+    a:hover{
+        background: linear-gradient(45deg, $greends-color, $pinkds-color);
+        -webkit-background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
+        background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
+        -webkit-text-fill-color: transparent; /* Ẩn màu văn bản gốc */
+    }
+
+    a::before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        width: 0;
+        height: 2px;
+        transition: all 0.4s ease;
+    }
+    
+    a:hover::before{
+        background: linear-gradient(45deg, $pinkds-color, $greends-color);
+        width: 100%;
+    }    
+}
+
+// Button login
+.header__navbar--btn-login{
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 3px solid $greends-color;
+    margin-right: 1px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.2s  ease all;
+    a{
+        text-decoration: none;
+        font-size: 15px;
+    }
+}
+
+.header__navbar--btn-login:hover{
+    scale: 1.05;
+    color: #fff;
+    background-color: $greends-color;
+    border: 3px solid transparent;
+}
+
+.header__navbar--btn-login:active{
+    scale: 0.95;
+}
+
+//Search box
+.header__navbar--search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input{
+        padding-left: 10px;
+        font-size: 14px;
+        height: 35px;
+        box-sizing: border-box;
+        border-radius: 10px 0px 0px 10px;
+        box-sizing: border-box;
+    }
+    
+    i{
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+    
+    button{
+        height: 35px;   
+        border-radius: 0 10px 10px 0;
+    }
+}
+
+
+.header__navbar--cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        outline: none;
+        display: flex; 
+        font-weight: bold;
+        align-items: center;
+        font-size: 15px;
+        transition: all 0.2s ease;
+    }
+
+    i {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    &:hover a {
+        background-color: #0D9993; 
+        border-radius: 10px;
+        color: #fff;
+    }
+}
+
+/* DROPDOWN MENU */
+.header__navbar--dropdown-menu{
+    display: none; /*hide dropdown menu*/
+    position: absolute; /*vị trí tuyệt đối - đặt dựa trên vị trí phần tử mẹ chứa nó*/
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden; /*Ẩn nội dung vượt quá kích thước*/
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    li{
+        padding: 0.7rem;
+        display: flex; /*Căn chỉnh nội dung*/
+        align-items: center;
+        justify-content: center;
+    }
+
+    a{
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+    }
+
+    a:hover{
+        background: linear-gradient(45deg, $greends-color, $pinkds-color);
+        -webkit-background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
+        background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
+        -webkit-text-fill-color: transparent; /* Ẩn màu văn bản gốc */
+    }
+
+    a::before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        width: 0;
+        height: 2px;
+        transition: all 0.4s ease;
+    }
+
+    a:hover::before{
+        background: linear-gradient(45deg, $pinkds-color, $greends-color);
+        width: 100%;
+    }
+
+    .header__navbar--btn-login{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.header__navbar--dropdown-menu.open_menu{
+    height: 240px;
+}
+
+
+// DROPDOWN MENU PRODUCT
+
+.navbar__dropdown--product-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    a:hover {
+        background-color: #ddd;
+    }
+}
+
+.header__navbar--dropdown-product:hover .navbar__dropdown--product-content {
+    display: block;
+}
+
+

@@ -1,0 +1,362 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.name__shop {
+  font-size: 40px;
+  font-family: "Kalam", cursive;
+  text-align: center;
+}
+
+.bvtshop__info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 100px;
+}
+.bvtshop__info .bvtshop__info--card {
+  width: 300px;
+  height: 220px;
+}
+.bvtshop__info .bvtshop__info--card p {
+  font-size: 25px;
+  font-weight: bold;
+  background: linear-gradient(to left, #001eff, #000000);
+  /* Mã màu gradient */
+  -webkit-background-clip: text;
+  /* Clip vùng background vào vùng text */
+  -webkit-text-fill-color: transparent;
+  /* Cho phép vùng background hiển thị qua vùng text */
+}
+.bvtshop__info .bvtshop__info--card i {
+  border-radius: 50%;
+  position: relative;
+  filter: drop-shadow(1px 1px 10px rgb(245, 161, 215));
+  font-size: 80px;
+  background: linear-gradient(to left, #8A2387, #E94057, #F27121);
+  /* Mã màu gradient */
+  -webkit-background-clip: text;
+  /* Clip vùng background vào vùng text */
+  -webkit-text-fill-color: transparent;
+  /* Cho phép vùng background hiển thị qua vùng text */
+}
+
+.title__trending--product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title__trending--product p {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #001eff, #000000);
+  /* Mã màu gradient */
+  -webkit-background-clip: text;
+  /* Clip vùng background vào vùng text */
+  -webkit-text-fill-color: transparent;
+  /* Cho phép vùng background hiển thị qua vùng text */
+}
+.title__trending--product a {
+  text-decoration: none;
+  color: rgb(255, 248, 248);
+  font-size: 2rem;
+  border-radius: 10px;
+  width: 40%;
+  text-align: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to left, #8A2387, #E94057, #F27121);
+}
+.title__trending--product a:hover {
+  font-weight: bold;
+  transform: scale(1.1);
+  background: linear-gradient(to right, #8A2387, #E94057, #F27121);
+}
+
+.frame__trending--product {
+  margin: 20px;
+}
+
+.trending__product--slider {
+  position: relative;
+}
+.trending__product--slider .trending__product--card {
+  height: 300px;
+  background-color: #000000;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  /* Tạo khoảng cách bên phải giữa các card */
+  padding: 10px;
+}
+.trending__product--slider .trending__product--card img {
+  width: 80%;
+  height: 200px;
+  align-self: center;
+}
+.trending__product--slider .trending__product--card .trending__product--card-info p {
+  margin-top: 5px;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+.trending__product--slider .trending__product--card .trending__product--card-info a {
+  margin-top: 10px;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.custom-prev,
+.custom-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  /* Điều chỉnh kích thước nút nếu cần */
+  height: 40px;
+  /* Điều chỉnh kích thước nút nếu cần */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Màu nền của nút */
+  color: white;
+  /* Màu chữ của nút */
+  border: none;
+  border-radius: 50%;
+  /* Để tạo hình tròn cho nút */
+  z-index: 1000;
+  /* Đảm bảo nút hiển thị trên top của hình ảnh */
+  cursor: pointer;
+  /* Hiển thị cursor là pointer khi di chuột qua nút */
+}
+
+.custom-prev {
+  height: auto;
+  left: 0;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.custom-next {
+  height: auto;
+  right: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* Hover style */
+.custom-prev:hover,
+.custom-next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Màu nền khi hover */
+}
+
+.frame__sale--product {
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 10px;
+}
+.frame__sale--product .sale__product--title p {
+  background: linear-gradient(to right, #f80759, #bc4e9c);
+  /* Mã màu gradient */
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: #fff;
+  padding: 5px;
+}
+.frame__sale--product .sale__product--title i {
+  font-size: 30px;
+}
+.frame__sale--product .sale__product--card {
+  position: relative;
+  margin: 10px;
+  width: 280px;
+  height: 400px;
+  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.5);
+  border-radius: 0 0 0 0;
+}
+.frame__sale--product .sale__product--card .sale__sale-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 15%;
+  font-weight: bold;
+  z-index: 999;
+}
+.frame__sale--product .sale__product--card .sale__prooduct--img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frame__sale--product .sale__product--card .sale__prooduct--img img {
+  width: 260px;
+  height: 290px;
+  transition: all 0.3s ease;
+}
+.frame__sale--product .sale__product--card .sale__prooduct--img .img_sale2 {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.frame__sale--product .sale__product--card .sale__product--name p {
+  margin-top: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.frame__sale--product .sale__product--card .sale_product--price {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.frame__sale--product .sale__product--card .sale_product--price h4 {
+  color: #f12711;
+  font-weight: bold;
+  text-align: center;
+}
+.frame__sale--product .sale__product--card .sale_product--price h5 {
+  color: rgb(116, 118, 117);
+  text-align: center;
+  text-decoration: line-through;
+  font-style: italic;
+}
+.frame__sale--product .sale__product--card .sale_product--price span {
+  font-weight: bold;
+  color: #af3131;
+  background-color: #eabcbc;
+}
+.frame__sale--product .sale__product--card .sale__card--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10%);
+  position: absolute;
+  bottom: 90px;
+  /* Hiển thị ở phía dưới của .sale__product--card */
+  left: 0;
+  width: 100%;
+  /* Đảm bảo chiều rộng 100% của phần tử cha */
+  padding: 20px;
+  /* Khoảng cách từ nút đến mép của .sale__product--card */
+  box-sizing: border-box;
+  /* Đảm bảo padding không làm thay đổi kích thước của phần tử */
+}
+.frame__sale--product .sale__product--card .sale__card--btn a {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  text-decoration: none;
+}
+.frame__sale--product .sale__product--card:hover {
+  box-shadow: 5px 5px 5px 5px rgba(6, 6, 6, 0.8);
+}
+.frame__sale--product .sale__product--card:hover .sale__card--img .img_sale2 {
+  display: block;
+  opacity: 1;
+}
+.frame__sale--product .sale__product--card:hover .sale__card--img .img_sale1 {
+  opacity: 0;
+}
+.frame__sale--product .sale__product--card:hover .img_sale2 {
+  display: block;
+  opacity: 1;
+}
+.frame__sale--product .sale__product--card:hover .img_sale1 {
+  opacity: 0;
+}
+.frame__sale--product .sale__product--card:hover .sale__card--btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.frame__sale--product .sale__product--btn-more a {
+  font-size: 20px;
+  text-decoration: none;
+  color: #000000;
+  border-radius: 10px;
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  margin: 20px;
+  padding: 5px;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+.frame__sale--product .sale__product--btn-more a:hover {
+  background: linear-gradient(to right, #38ef7d, #11998e);
+}
+
+#trending_title {
+  position: relative;
+  opacity: 0;
+}
+
+#trending_seemore {
+  position: relative;
+  opacity: 0;
+}
+
+#trending_slide {
+  position: relative;
+  opacity: 0;
+}
+
+.slide-left {
+  animation: slideInFromLeft 0.5s ease forwards;
+}
+
+.slide-bottom {
+  animation: slideInFromBottom 0.5s ease forwards;
+}
+
+.slide-right {
+  animation: slideInFromRight 0.5s ease forwards;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}/*# sourceMappingURL=style_home.css.map */

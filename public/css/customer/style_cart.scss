@@ -1,0 +1,248 @@
+.form__cart {
+    // margin: 30px 100px 30px 100px;
+    margin: 50px;
+    // background-color: #fff;
+}
+
+//style shopping cart
+.cart__details {
+    background-color: #fff;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    // border: 1px solid black;
+    margin: 10px;
+
+    .cart__details--checkbox {}
+
+    .cart__details--img {
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .cart__details--name {
+        p {
+            padding-top: 5px;
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+    }
+
+    .cart__details--btn-delete {
+        transition: all 0.3s ease;
+
+        button {
+            border: none;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                color: red;
+                font-size: 25px;
+            }
+        }
+
+        button:hover {
+            background-color: red;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+
+            i {
+                color: #fff;
+            }
+        }
+    }
+
+    .cart__details--quantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            width: 40%;
+            margin: 10px;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .cart__details--total {
+        margin-top: 50%;
+
+        h4 {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    }
+}
+
+
+//phần thanh toán
+.form__payment {
+    background-color: #fff;
+    margin: 10px 0 10px 20px;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    height: auto;
+    padding: 10px;
+
+    p {
+        padding-top: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+    }
+}
+
+.form__voucher {
+    background-color: #fff;
+    margin: 10px 0 10px 20px;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    height: auto;
+    padding: 10px;
+
+    p {
+        padding-top: 5px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        font-size: 13px;
+        font-weight: bold;
+        border: none;
+        background-color: #ff9050;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 3px 3px 3px 3px rgb(6, 6, 6, 0.5);
+    }
+}
+
+// form xác nhận đặt
+.form__confirm {
+    background-color: #fff;
+    margin: 10px 0 10px 20px;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    height: auto;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 13px;
+    }
+
+    .total__pay {
+        p {
+            color: red;
+            font-weight: bold;
+            font-size: 13px;
+        }
+    }
+
+    .pay__on {
+        align-items: start;
+    }
+
+    .pay__off {
+        align-items: end;
+
+        input {
+            margin-left: 10px;
+        }
+    }
+
+    button {
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border: none;
+        background-color: #ff9050;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 3px 3px 3px 3px rgb(6, 6, 6, 0.5);
+    }
+}
+
+
+//thông tin ngày đặt ngày giao hàng dự kiến
+.form__deliver {
+    background-color: #fff;
+    margin: 10px 0 10px 20px;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    height: auto;
+    padding: 10px;
+
+    .form__deliver--title {
+        p {
+            font-size: 13px;
+            font-weight: bold;
+        }
+    }
+
+    .form__deliver--date{
+        p{
+            font-size: 13px;
+        }
+    }
+
+}
+
+//thông tin địa chỉ nhận hàng
+.form__location{
+    background-color: #fff;
+    margin: 10px 0 10px 20px;
+    box-shadow: 5px 5px 5px 5px rgb(6, 6, 6, 0.5);
+    height: auto;
+    padding: 10px;
+
+    .form__location--title{
+        p {
+            font-size: 13px;
+            font-weight: bold;
+        }
+    }
+
+    .form__location--locate{
+        p{
+            font-size: 13px;
+        }
+        button{
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            i{
+                font-size: 20px;
+                color: red;
+            }
+        }
+    }
+
+}

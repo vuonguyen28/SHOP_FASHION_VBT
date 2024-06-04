@@ -1,0 +1,243 @@
+.form__info--main {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.form__info--main img {
+  margin-top: 20px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.form__info--main p {
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+.form__info--main nav {
+  width: 100%;
+}
+.form__info--main nav ul li {
+  list-style-type: none;
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+}
+.form__info--main nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+}
+.form__info--main nav ul li i {
+  font-size: 20px;
+}
+.form__info--main nav ul li:hover {
+  background-color: rgb(182, 182, 182);
+  border-radius: 10px 0 0 10px;
+}
+
+.form__search--bill {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form__search--bill input {
+  width: 100%;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 10px 0 0 10px;
+}
+.form__search--bill button {
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 0px 10px 10px 0;
+}
+
+.form__bill {
+  margin: 10px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 10px 10px 0 0;
+  overflow: auto;
+  position: relative;
+}
+.form__bill .form__bill--header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E3AD20;
+  border-radius: 10px 10px 0 0;
+  padding: 0;
+  z-index: 1000;
+}
+.form__bill .form__bill--header a {
+  text-decoration: none;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+  flex: 1;
+  font-size: 13px;
+  padding: 3px;
+}
+.form__bill .form__bill--header a:first-child {
+  border-radius: 10px 0 0 0;
+}
+.form__bill .form__bill--header a:last-child {
+  border-radius: 0 10px 0 0;
+}
+.form__bill .form__bill--header a:hover {
+  background-color: #906C10;
+}
+.form__bill .form__bill--content {
+  margin-left: 1px;
+}
+.form__bill .form__bill--content .form__bill--main {
+  margin-top: 10px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 1px 2px black;
+}
+.form__bill .form__bill--content .form__bill--main p {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_seeDetail {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(26, 204, 26);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_seeDetail:hover {
+  background-color: rgb(63, 229, 63);
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_cancel {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(254, 0, 0);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_cancel:hover {
+  background-color: rgb(233, 71, 71);
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_feedBack {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(255, 200, 0);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_feedBack:hover {
+  background-color: #dfb751;
+}
+.form__bill .form__bill--content .form__bill--detail {
+  background-color: #fff;
+  box-shadow: 1px 1px 1px 1px rgba(39, 38, 38, 0.6);
+  margin: 10px 0 0 0;
+  padding: 5px;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__img--product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__img--product img {
+  width: 100%;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__infor--col2 h4 {
+  text-decoration: underline;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__infor--col3 h4 {
+  text-decoration: underline;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_seeDetail {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(26, 204, 26);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_seeDetail:hover {
+  background-color: rgb(63, 229, 63);
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_cancel {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(254, 0, 0);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_cancel:hover {
+  background-color: rgb(233, 71, 71);
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_feedBack {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(255, 200, 0);
+  width: 80%;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--detail .bill__info--btn .btn_feedBack:hover {
+  background-color: #dfb751;
+}
+.form__bill .form__bill--content .form__bill--detail .state_delive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.form__bill .form__bill--content .form__bill--detail .state_delive p {
+  font-weight: bold;
+}
+.form__bill .form__bill--content .form__bill--detail .state_delive i {
+  font-size: 20px;
+  color: green;
+}
+.form__bill .form__bill--content .form__bill--detail .location__phone p i {
+  color: red;
+  font-size: 15px;
+}
+.form__bill .form__bill--content .form__bill--detail .location__phone h6 i {
+  color: green;
+  font-size: 15px;
+}/*# sourceMappingURL=style_bill.css.map */

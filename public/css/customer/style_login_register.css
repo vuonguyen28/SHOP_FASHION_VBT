@@ -1,0 +1,97 @@
+.box-area {
+  width: 930px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.box-area small a {
+  margin-left: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.left__form--login {
+  background-color: rgb(26, 192, 192);
+}
+.left__form--login p {
+  font-weight: bold;
+  font-size: 30px;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+}
+.left__form--login small {
+  color: #fff;
+  font-size: 15px;
+  text-wrap: wrap;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.right__form--login {
+  padding: 40px 30px 40px 40px;
+}
+.right__form--login .form__login--header p {
+  font-size: 30px;
+  font-weight: bold;
+}
+.right__form--login .form__login--input input {
+  font-family: "SF Pro";
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1.5px solid #000;
+  border-radius: 0.5rem;
+  box-shadow: 2.5px 3px 0 #000;
+  outline: none;
+  transition: ease 0.25s;
+}
+.right__form--login .form__login--input input:focus {
+  box-shadow: 5.5px 7px 0 black;
+}
+.right__form--login .form__login--input button {
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  background-color: rgb(26, 192, 192);
+  color: #fff;
+  border-radius: 10px;
+}
+.right__form--login .form__login--input button:hover {
+  background-color: #23853b;
+}
+
+.main_form_register {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .box-area {
+    margin: 0 10px;
+  }
+  .left__form--login {
+    height: 100px;
+    overflow: hidden;
+  }
+  .left__form--login p {
+    font-size: 20px;
+  }
+  .left__form--login small {
+    display: none;
+  }
+  .left__form--login .featured-image img {
+    display: none;
+  }
+  .right__form--login {
+    padding: 20px;
+  }
+  .right__form--login .form__login--header p {
+    font-size: 20px;
+    text-align: center;
+  }
+  .right__form--login .form__login--header h5 {
+    font-size: 13px;
+    text-align: center;
+  }
+}/*# sourceMappingURL=style_login_register.css.map */

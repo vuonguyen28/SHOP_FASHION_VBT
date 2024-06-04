@@ -1,0 +1,86 @@
+.btn__myvoucher {
+  margin-bottom: 20px;
+}
+.btn__myvoucher a {
+  text-decoration: none;
+  color: black;
+  background-color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid black;
+  transition: all 0.1s;
+}
+.btn__myvoucher a:hover {
+  box-shadow: 1px 1px 1px 1px;
+}
+
+.voucher__card {
+  background: linear-gradient(135deg, #FFA49F, #FF2A70);
+  color: #fff;
+  border-radius: 15px;
+  position: relative;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.voucher__card img {
+  width: 50px;
+  margin-bottom: 5px;
+}
+.voucher__card h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: italic;
+}
+.voucher__card p {
+  text-align: center;
+  font-size: 15px;
+}
+.voucher__card .voucher__row {
+  display: flex;
+  align-items: center;
+  margin: 5px auto;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.voucher__card .voucher__row #cpnCode {
+  border: 1px dashed #fff;
+  padding: 10px 20px;
+}
+.voucher__card .circle, .voucher__card .circle2, .voucher__card .circle1 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.voucher__card .circle1 {
+  left: -25px;
+  -webkit-clip-path: inset(0% 0% 0% 50%);
+          clip-path: inset(0% 0% 0% 50%);
+}
+.voucher__card .circle2 {
+  right: -25px;
+  -webkit-clip-path: inset(0% 50% 0% 0%);
+          clip-path: inset(0% 50% 0% 0%);
+}
+.voucher__card button {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: black;
+  border: none;
+  width: 100px;
+  border-radius: 10px;
+  border: 2px dashed transparent;
+  background-color: #fff;
+}
+.voucher__card button:hover {
+  border: 2px dashed red;
+  box-sizing: border-box;
+}/*# sourceMappingURL=style_voucher.css.map */

@@ -1,0 +1,49 @@
+/* EDIT PROFILE CUSTOMER */
+.form__edit--profile {
+    width: 90%;
+    height: auto;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+.form__edit--profile-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form__edit--profile-avatar .profile__avatar img {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.form__edit--profile .profile__btn--choose-avatar input {
+    display: none;
+}
+
+.form__edit--profile .profile__btn--choose-avatar label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    border: 1px dashed black;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.form__edit--profile .profile__btn--choose-avatar label:hover {
+    color: red;
+    border: 1px dashed red;
+}
+
+.form__edit--profile .form__edit--btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}

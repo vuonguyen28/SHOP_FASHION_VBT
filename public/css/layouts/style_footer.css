@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap");
+.footer {
+  background-color: rgb(46, 185, 131);
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.footer .footer__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.footer .footer__logo img {
+  width: 200px;
+  height: 200px;
+}
+.footer .footer__logo p {
+  font-size: 40px;
+  font-family: "Rubik Doodle Shadow", system-ui;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+.footer .footer__info {
+  margin-top: 30px;
+}
+.footer .footer__info p {
+  font-size: 23px;
+  color: #fff;
+  font-weight: bold;
+}
+.footer .footer__info h4 {
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+.footer .footer__info h4 i {
+  font-size: 18px;
+}
+.footer .footer__info h4:hover {
+  color: rgb(241, 98, 98);
+}/*# sourceMappingURL=style_footer.css.map */

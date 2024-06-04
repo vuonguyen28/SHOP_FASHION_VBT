@@ -1,0 +1,392 @@
+/* REPONSIVE */
+
+
+@media(max-width: 992px) {
+
+    .header__navbar .header__navbar--links-nav,
+    .header__navbar .header__navbar--btn-login {
+        display: none;
+    }
+
+    .header__navbar .header__navbar--toggle-btn {
+        display: block;
+        font-size: 2rem;
+    }
+
+    .name__shop {
+        font-size: 20px;
+    }
+
+    .footer {
+        .footer__info {
+            margin-left: 60px;
+        }
+    }
+
+    .title__trending--product {
+        p {
+            font-size: 30px;
+        }
+
+        a {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .sale__product {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    .header__navbar--dropdown-menu {
+        display: block;
+    }
+
+    .swiper {
+        width: 85%;
+    }
+
+    .bvtshop__info {
+        gap: 10px;
+
+        .bvtshop__info--card {
+            width: 200px;
+            height: 120px;
+
+            p {
+                font-size: 10px;
+            }
+
+            i {
+                font-size: 30px;
+            }
+
+            h4 {
+                font-size: 10px;
+            }
+        }
+    }
+
+    .frame__sale--product {
+        .sale__product--title {
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .sale__product--card {
+
+
+            width: 240px;
+            height: 360px;
+            gap: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+
+            .sale__prooduct--img {
+
+                img {
+                    width: 230px;
+                    height: 250px;
+                }
+            }
+        }
+    }
+
+    //cart
+    .form__cart {
+
+        .cart__details{
+            .cart__details--name {
+                p {
+                    font-size: 14px;
+                }
+            }
+
+            .cart__details--quantity{
+                button{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .cart__details--total{
+                h4{
+                    font-size: 13px;
+                }
+                p{
+                    font-size: 15px;
+                }
+            }
+        }
+
+        .form__voucher {
+            .form__voucher--acp {
+                button {
+                    width: 80%;
+                }
+            }
+        }
+    }
+
+
+
+}
+
+@media(max-width: 576px) {
+    .header__navbar--dropdown-menu {
+        left: 2rem;
+        width: unset;
+    }
+
+    .header__navbar--cart {
+
+        a {
+            font-size: 0;
+            width: 30px;
+        }
+
+        i {
+            font-size: 30px;
+        }
+    }
+
+    .footer {
+        .footer__info {
+            margin-left: 60px;
+        }
+    }
+
+    .trending__product {
+        display: flex;
+        align-items: center;
+    }
+
+    .frame__trending--product {
+        .title__trending--product {
+            p {
+                font-size: 30px;
+            }
+
+            a {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .trending__product--card {
+            img {
+                width: 200px;
+            }
+        }
+    }
+
+
+
+    .swiper {
+        width: 70%;
+    }
+
+    .bvtshop__info {
+        gap: 10px;
+
+        .bvtshop__info--card {
+            width: 200px;
+            height: 120px;
+
+            p {
+                font-size: 10px;
+            }
+
+            i {
+                font-size: 30px;
+            }
+
+            h4 {
+                font-size: 10px;
+            }
+        }
+    }
+
+    .frame__sale--product {
+
+        .sale__product--title {
+            p {
+                font-size: 16px;
+            }
+
+            i {
+                font-size: 16px;
+            }
+        }
+
+        .sale__product--card {
+
+            width: 150px;
+            height: 260px;
+            box-shadow: 1px 1px 1px 1px rgb(6, 6, 6, 0.5);
+
+            .sale__prooduct--img {
+
+                img {
+                    width: 140px;
+                    height: 160px;
+                }
+            }
+
+            .sale__product--name {
+                p {
+                    font-size: 12px;
+                }
+            }
+
+            .sale_product--price {
+                h4 {
+                    font-size: 8px;
+                }
+
+                h5 {
+                    font-size: 7px;
+                }
+
+                span {
+                    font-size: 6px;
+                }
+            }
+
+            .sale__card--btn {
+                display: flex;
+
+                a {
+                    margin: 0;
+                    font-size: 8px;
+                }
+            }
+        }
+
+        .sale__product--btn-more {
+            a {
+                font-size: 16px;
+            }
+        }
+
+    }
+
+    // thanh danh mục
+    .sidebar__category {
+        .sildebar__category--title {
+            p {
+                font-size: 15px;
+            }
+
+            li>a {
+                font-size: 15px;
+            }
+        }
+    }
+
+
+    // details product
+    .card__details--product {
+
+        .detail__product--action {
+            p {
+                font-size: 20px;
+            }
+
+            .detail__product--price {
+                p {
+                    font-weight: normal;
+                }
+            }
+
+            .swatch-element {
+                input {
+                    width: 70px;
+                }
+
+                label {
+                    text-align: center;
+                    width: 70px;
+                    padding: 5px;
+                }
+            }
+
+            .detail__product--btn {
+                a {
+                    font-size: 14px;
+                }
+
+                button{
+                    font-size: 14px;
+                }
+            }
+        }
+
+    }
+
+
+    //cart
+
+    .form__cart {
+
+        .cart__details {
+
+            .cart__details--img {
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+
+            .cart__details--name {
+                p {
+                    font-size: 13px;
+                }
+            }
+
+            .cart__details--quantity {
+                button {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                input {
+                    width: 30px;
+                }
+            }
+
+            .cart__details--total {
+                h4 {
+                    font-size: 13px;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+            }
+
+            .cart__details--btn-delete {
+                button {
+                    i {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+        }
+
+
+        .form__voucher {
+            .form__voucher--acp {
+                button {
+                    width: 80%;
+                }
+            }
+        }
+
+    }
+
+}
