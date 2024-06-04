@@ -14,10 +14,8 @@
         {{-- menu --}}
         <div class="col-md-2">
             <div class="form__info--main">
-                @if (session('LoggedAvatar'))
-                    <img class="avatar" src="{{ asset('avatars/' . session('LoggedAvatar')) }}" alt="User Avatar">
-                @else
-                    <img class="avatar" src="{{ asset('images/default-avatar.jpg') }}" alt="Default Avatar">
+                @if (session('Avatar'))
+                    <img class="avatar" src="{{ asset('avatars/' . session('Avatar')) }}" alt="User Avatar">
                 @endif
                 <p> {{ session('LoggedName') }}</p>
                 <hr style="border: 1px solid black; width: 100%;">

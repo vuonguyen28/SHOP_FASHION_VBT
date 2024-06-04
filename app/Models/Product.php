@@ -26,4 +26,9 @@ class Product extends Model
     {
         return $this->hasMany(Image::class,'MaSP');
     }
+
+    public function ProductDetails()
+    {
+        return $this->hasMany(ProductDetails::class, 'MaSP');
+    }
 }

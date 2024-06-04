@@ -30,6 +30,8 @@ class LoginController extends Controller
                     session()->put("LoggedName", $customer->TenKH);
                     session()->put("LoggedAddress",$customer->DiaChi);
                     session()->put("LoggedPhone",$customer->SoDienThoai);
+                    session()->put("Avatar",$customer->Avatar);
+
 
                     return redirect()->route('product.top-8-sale');
                 } else {

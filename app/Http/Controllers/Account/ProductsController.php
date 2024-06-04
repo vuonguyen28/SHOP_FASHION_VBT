@@ -52,8 +52,10 @@ class ProductsController extends Controller
 
     public function SeeProductDetails($id)
     {
-        $product = Product::findOrFail($id);
+        //$product = Product::findOrFail($id);
         $productDetails = ProductDetails::where('MaSP', $id)->get();
+
+        $product = Product::with('ProductDetails.OrderDetails.Feedback')->find($id);
 
         return view('account.products.SeeProductDetails', compact('product', 'productDetails'));
     }

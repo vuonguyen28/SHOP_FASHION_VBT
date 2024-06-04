@@ -28,4 +28,11 @@ class ProductDetails extends Model
     {
         return $this->belongsTo(Color::class, 'MaMau');
     }
+
+    public function OrderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'MaChiTietSanPham');
+    }
+
+
 }

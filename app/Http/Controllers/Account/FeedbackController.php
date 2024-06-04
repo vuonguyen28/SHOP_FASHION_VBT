@@ -31,6 +31,7 @@ class FeedbackController extends Controller
             'NoiDung'=>$request->NoiDung,
             'ThoiGianfeedback'=>date('d-m-y H:i:s'),
             'DanhGia'=>$request->DanhGia,
+            
         ]);
         return redirect()->back()->with('success','đã feedback thành công đơn hàng');
     }

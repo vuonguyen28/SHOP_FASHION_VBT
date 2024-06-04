@@ -253,7 +253,30 @@
                     </div>
                 </div>
             </div>
+
+            @foreach ($product->ProductDetails as $productDetail)
+                @foreach ($productDetail->OrderDetails as $orderDetail)
+                    @foreach ($orderDetail->Feedback as $feedback)
+                        <div class="feedback">
+                            <p><strong>Nội dung:</strong> {{ $feedback->NoiDung }}</p>
+                            <p><strong>Đánh giá:</strong> {{ $feedback->DanhGia }}</p>
+                            <p><strong>Thời Gian:</strong> {{ $feedback->ThoiGianfeedback }}</p>
+                            <p><strong>Ten KH:</strong> {{ $feedback->Customer->TenKH }}</p>
+                            <p><strong>Ten KH:</strong> {{ $feedback->Customer->avatar }}</p>
+                        </div>
+                    @endforeach
+                @endforeach
+            @endforeach
+
         </form>
     </section>
+
+
+
+
+
+
+
+
 
 @endsection

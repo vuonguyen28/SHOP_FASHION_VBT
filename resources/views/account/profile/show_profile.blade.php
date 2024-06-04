@@ -8,6 +8,28 @@
     @include('account.Order.menu_layout_bill')
 
 
+    {{-- Hiển thị thông báo thành công nếu có --}}
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Thông Báo",
+                text: " {{ session('success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+
+    {{-- Hiển thị thông báo lỗi chung nếu có --}}
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "The Internet?",
+                text: "  {{ session('error') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
+
     {{-- end header --}}
     {{-- start content --}}
     <div class="col-md-10">
@@ -16,13 +38,16 @@
                 {{-- avatar --}}
                 <div class="col-md-5 form__edit--profile-avatar">
                     <div class="profile__avatar">
-                        {{-- <img src="{{ asset('avatars/' . $customer->avatar) }}" width="100" height="100" alt="Current Avatar"> --}}
+                        <img src="{{ asset('avatars/' . $customer->avatar) }}" width="100" height="100"
+                            alt="Current Avatar">
                     </div>
 
-                    <div class="profile__btn--choose-avatar">
-                        <input type="file" name="avatar" id="avatar">
-                        <label for="avatar">Upload file</label>
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateAddressModal_image">
+                        up loding file image
+                    </button>
+
+                    
+
                 </div>
 
                 {{-- infomation --}}
@@ -30,57 +55,285 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="TenKH">Họ và tên:</label>
-                            {{-- <input type="text" name="TenKH" value="{{ $customer->TenKH }}" class="form-control" id="name" --}}
-                            {{-- placeholder="Enter Name" required> --}}
+                            <label for="TenKH">Họ và tên:
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_NAME">
+                                    edit
+                                </button>
+
+
+                            </label>
+                            <input type="text" name="TenKH" value="{{ $customer->TenKH }}" class="form-control"
+                                id="name" placeholder="Enter Name" required>
+
                         </div>
+
+
                         <div class="col-md-6">
-                            <label for="GioiTinh">Giới Tính:</label>
-                            <select class="form-select" id="gender" name="GioiTinh" style="width:50%">
-                                {{-- <option value="Nam" {{ $customer->GioiTinh == 'Nam' ? 'selected' : '' }}>Nam</option>
-                                <option value="Nữ" {{ $customer->GioiTinh == 'Nữ' ? 'selected' : '' }}>Nữ</option> --}}
-                            </select>
+                            <label for="GioiTinh">Giới Tính: {{ $customer->GioiTinh }}</label>
+                            <button type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#updateAddressModal_gender">
+                                edit giới tính
+                            </button>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="SoDienThoai">Số Điện Thoại:</label>
-                            {{-- <input type="text" name="SoDienThoai" value="{{ $customer->SoDienThoai }}" class="form-control"
-                                id="phone" placeholder="Enter Phone" required> --}}
+                            <label for="SoDienThoai">Số Điện Thoại:
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_Phone">
+                                    edit
+                            </label>
+                            <input type="text" name="SoDienThoai" value="{{ $customer->SoDienThoai }}"
+                                class="form-control" id="phone" placeholder="Enter Phone" required>
                         </div>
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="Email">Email:</label>
-                        {{-- <input type="email" name="Email" value="{{ $customer->Email }}" class="form-control" id="email" --}}
-                        {{-- placeholder="Enter email" required style="width:70%"> --}}
+                        <label for="Email">Email:<button type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#updateAddressModal_Email">
+                                edit</label>
+                        <input type="email" name="Email" value="{{ $customer->Email }}" class="form-control"
+                            id="email" placeholder="Enter email" required style="width:70%">
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="Password_hs5">PassWord:</label>
-                        {{-- <input type="password" name="Password_hs5" value="{{ $customer->Password_hs5 }}" class="form-control" --}}
-                        {{-- id="password" placeholder="Enter Password" required style="width:70%"> --}}
+                        <button type="button" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#updateAddressModal_Password">update Password</button>
                     </div>
 
                     <div class="mb-3 mt-3">
-                        <label for="DiaChi">Địa Chỉ:</label>
-                        {{-- <input type="text" name="DiaChi" value="{{ $customer->DiaChi }}" class="form-control" id="adđress"
-                            placeholder="Enter Address" required style="width:90%"> --}}
-                    </div>
-                </div>
-                <div class="col-md-12 ">
-                    <div class="form__edit--btn">
-                        <button  type="submit"><i class='bx bx-save'></i>SAVE CHANGE</button>
+                        <label for="DiaChi">Address:
+                            <button type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#updateAddressModal_Address">
+                                edit
+                        </label>
+                        <input type="text" name="DiaChi" value="{{ $customer->DiaChi }}" class="form-control"
+                            id="adđress" placeholder="Enter Address" required style="width:90%">
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    </div>
-    </div>
-    {{-- end form bill  --}}
+
+
+
+
+    <div class="modal" id="updateAddressModal_NAME">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editName') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">User Name</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>USER NAME</label>
+                            <input value="" name="name" placeholder="text feedback">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 
+
+
+
+
+    <div class="modal" id="updateAddressModal_Phone">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editPhone') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Phone</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>phone</label>
+                            <input value="" name="Phone" placeholder="text feedback">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal" id="updateAddressModal_Email">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editEmail') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Email</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input value="" name="Email" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal" id="updateAddressModal_Address">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editAddress') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Address</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input value="" name="Address" placeholder="Address">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="updateAddressModal_gender">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editgender') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">gender</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <select class="form-select" id="gender" name="gender" style="width:50%">
+                            <option value="Nam" {{ $customer->GioiTinh == 'Nam' ? 'selected' : '' }}>Nam</option>
+                            <option value="Nữ" {{ $customer->GioiTinh == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="updateAddressModal_image">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editimage') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">image</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="profile__btn--choose-avatar">
+                            <input type="file" name="avatar" id="avatar">
+                            <label for="avatar">Upload file</label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal" id="updateAddressModal_Password">
+        <div class="modal-dialog">
+            <form action="{{ route('profile.editPassword') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Password</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>nhập mật khẩu cũ</label>
+                            <input type="password" value="" name="oldPassword" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="sumTotalMoney" value="">
+                        <div class="form-group">
+                            <label>nhập mật khẩu mới</label>
+                            <input type="password" value="" name="Password" placeholder="Password">
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">UPDATE PROFILE</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 
 

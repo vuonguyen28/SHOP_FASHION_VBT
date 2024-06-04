@@ -336,8 +336,6 @@ route::post('/check_order_WalkInCustomers',[OrderController::class, 'SearchBill_
 //XEM CHI TIẾT ĐƠN HÀNG CỦA KHÁCH HÀNG VÃN LAI
 route::post('/detail_order_walkInCus',[OrderController::class, 'FindOrderDetail_WalkInCustomers'])->name('show.detailOrder');
 
-//USER PROFILE
-Route::get('/user/ShowProfile', [ProfileController::class, 'ShowProfile'])->name('user.ShowProfile');
 
 
 // search product
@@ -371,3 +369,26 @@ Route::post('/bill/ShowDeliveredBill', [BillController::class, 'ShowDeliveredBil
 
 // FEEDBACK TO ORDER DETAIL 
 Route::post('/feedback/FeedbackToOrder', [FeedbackController::class, 'FeedbackToOrderDetail'])->name('feedback.FeedbackToOrderDetail');
+
+
+
+
+//USER PROFILE
+Route::get('/user/ShowProfile', [ProfileController::class, 'ShowProfile'])->name('user.ShowProfile');
+
+Route::post('/user/ShowProfile', [ProfileController::class, 'editName'])->name('profile.editName');
+
+Route::post('/user/ShowProfile_phone', [ProfileController::class, 'editPhone'])->name('profile.editPhone');
+
+Route::post('/user/ShowProfile_Email', [ProfileController::class, 'editEmail'])->name('profile.editEmail');
+
+Route::post('/user/ShowProfile_Address', [ProfileController::class, 'editAddress'])->name('profile.editAddress');
+
+Route::post('/user/ShowProfile_Password', [ProfileController::class, 'editPassword'])->name('profile.editPassword');
+
+Route::post('/user/ShowProfile_gender', [ProfileController::class, 'editgender'])->name('profile.editgender');
+
+
+Route::post('/user/ShowProfile_image', [ProfileController::class, 'editimage'])->name('profile.editimage');
+
+

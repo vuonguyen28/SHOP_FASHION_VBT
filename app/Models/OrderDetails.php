@@ -19,6 +19,11 @@ class OrderDetails extends Model
         return $this->belongsTo(ProductDetails::class, 'MaChiTietSanPham');
     }
 
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class, 'MaChiTietDH');
+    }
+
     /**
      * Tính tổng số lượng đơn hàng
      */
