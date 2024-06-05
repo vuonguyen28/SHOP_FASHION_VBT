@@ -93,12 +93,7 @@ class ImageController extends Controller
                 }
             }
 
-            //     return redirect()->back()->with('success', 'Các hình ảnh đã được xóa thành công.');
-            // } else {
-            //     return redirect()->back()->with('error', 'Vui lòng chọn ít nhất một hình ảnh để xóa.');
-            // }
-
-            return response()->json(['success' => true, 'message' => 'Các hình ảnh đã được xóa thành công.']);
+            return redirect()->back()->with('success', 'Các hình ảnh đã được xóa thành công.');
         } else {
             return response()->json(['success' => false, 'message' => 'Vui lòng chọn ít nhất một hình ảnh để xóa.'], 400);
         }
