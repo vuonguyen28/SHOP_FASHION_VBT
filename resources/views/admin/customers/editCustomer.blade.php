@@ -14,7 +14,7 @@
                 {{-- avatar --}}
                 <div class="col-md-5 form__edit--profile-avatar">
                     <div class="profile__avatar">
-                        <img src="{{ asset('avatars/' . $customer->avatar) }}" width="100" height="100" alt="Current Avatar">
+                        <img src="{{  $customer->avatar }}" width="100" height="100" alt="Current Avatar">
                     </div>
 
                     <div class="profile__btn--choose-avatar">

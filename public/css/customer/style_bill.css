@@ -335,4 +335,26 @@
 }
 .form__Order--content .form__details--click h6 {
   font-size: 14px;
+}
+
+.btn__feedback-send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn__feedback-send button {
+  background-color: #edb11a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.btn__feedback-send button:hover {
+  border: 1px solid black;
+}
+
+.form__feedback--send input {
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
 }/*# sourceMappingURL=style_bill.css.map */

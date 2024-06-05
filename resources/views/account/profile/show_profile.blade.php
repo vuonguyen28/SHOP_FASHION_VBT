@@ -38,7 +38,7 @@
                 {{-- avatar --}}
                 <div class="col-md-5 form__edit--profile-avatar">
                     <div class="profile__avatar">
-                        <img src="{{ asset('avatars/' . $customer->avatar) }}" width="100" height="100"
+                        <img src="{{  $customer->avatar }}" width="100" height="100"
                             alt="Current Avatar">
                     </div>
                     <div class="profile__btn--choose-avatar">
@@ -277,7 +277,7 @@
 
     <div class="modal" id="updateAddressModal_image">
         <div class="modal-dialog">
-            <form action="{{ route('profile.editimage') }}" method="POST">
+            <form action="{{ route('profile.editimage') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">

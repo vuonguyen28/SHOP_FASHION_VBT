@@ -38,7 +38,7 @@
                     <tr>
                         <td>{{ $c->MaKH }}</td>
                         <td>
-                            <img style="border-radius: 50%" src="{{ asset('avatars/' . $c->avatar) }}" width="70px"
+                            <img style="border-radius: 50%" src="{{  $c->avatar }}" width="70px"
                                 height="70px" alt="Avatar">
                         </td>
                         <td>{{ $c->TenKH }}</td>

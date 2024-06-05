@@ -422,3 +422,27 @@
 
     }
 }
+
+.btn__feedback-send{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+        background-color: #edb11a;
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    button:hover{
+        border: 1px solid black     ;
+    }
+}
+
+.form__feedback--send{
+    input{
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+    }
+}

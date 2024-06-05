@@ -81,7 +81,7 @@
                 </div>
 
                 {{-- Delivery fee --}}
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <p>Phí vận chuyển:</p>
                     <h6>{{ $item->PhiVanChuyen }}</h6>
                 </div>
@@ -107,7 +107,7 @@
 
 
                 {{-- Button to see details --}}
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div class="bill__info--btn">
                         <form action="{{ route('bill.ShowDeliveredBill_Detail_Bill') }}" method="POST">
                             @csrf
@@ -172,10 +172,10 @@
 
                             {{-- state --}}
                             <div class="col-md-1">
-                                <div class="state_delive">
+                                <div class="btn__feedback-send">
                                     <button type="button" class="btn" data-bs-toggle="modal"
                                         data-bs-target="#updateAddressModal{{ $item->MaChiTiet }}">
-                                        feedback
+                                        feedback<i class='bx bx-send'></i>
                                     </button>
                                 </div>
                             </div>
@@ -204,9 +204,11 @@
                                                         id="phone{{ $item->MaChiTiet }}" placeholder="text">
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label>Nội Dung FeedBack</label>
-                                                    <input value="" name="NoiDung" placeholder="text feedback">
+                                                <div class="row">
+                                                    <div class="form-group form__feedback--send">
+                                                        <label>Nội Dung FeedBack</label>
+                                                        <input value="" name="NoiDung" placeholder="Nội dung feedback">
+                                                    </div> 
                                                 </div>
 
                                                 {{-- <div class="form-group">
@@ -228,7 +230,7 @@
                                                         <label for="star1">&#9733;</label>
                                                     </div>
                                                 </div>
-s
+
                                             </div>
 
                                             {{-- Modal Footer --}}

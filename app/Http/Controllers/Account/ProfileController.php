@@ -15,6 +15,8 @@ use App\Models\Size;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 
 
@@ -122,44 +124,86 @@ class ProfileController extends Controller
 
     public function editimage(Request $request)
     {
-        $UserID = session('LoggedUser');
-        if (!$UserID) {
-            return redirect()->route('login.login')->with('error', 'vui lòng đăng nhập để xem thông tin cá nhân');
+        $userID = session('LoggedUser');
+
+        if (!$userID) {
+            return redirect()->route('login.login')->with('error', 'Vui lòng đăng nhập để xem thông tin cá nhân');
         }
 
-
-        $customer = Customer::findOrFail($UserID);
+        $customer = Customer::findOrFail($userID);
 
         $validatedData = $request->validate([
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('avatar')) {
-            if (file_exists(public_path('avatars/' . $customer->avatar))) {
-                unlink(public_path('avatars/' . $customer->avatar));
+            try {
+                $result = Cloudinary::upload($request->file('avatar')->getRealPath(), [
+                    'folder' => 'Avatar',
+                ]);
+
+                if ($customer->avatar) {
+                    preg_match('/\/v\d+\/(.+?)\.[a-zA-Z0-9]{3,4}$/', $customer->avatar, $matches);
+                    $publicId = isset($matches[1]) ? $matches[1] : null;
+                    if ($publicId) {
+                        Cloudinary::destroy($publicId);
+                    }
+                }
+
+                $customer->avatar = $result->getSecurePath();
+                $customer->save();
+
+                return redirect()->route('account.profile.show_profile', ['customer' => $customer])->with('success', 'Avatar đã được cập nhật thành công');
+            } catch (\Exception $e) {
+                return back()->withErrors(['avatar' => 'Không thể cập nhật avatar, vui lòng thử lại.']);
             }
-
-            // Lưu hình ảnh mới
-            $file = $request->file('avatar');
-            $fileNameToStore = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('avatars'), $fileNameToStore);
-
-            // Cập nhật avatar mới
-            $validatedData['avatar'] = $fileNameToStore;
-
-            $customer->update($validatedData);
-
-        } else {
-            dd("Không có file avata được tải lên.");
         }
 
-        return view('account.profile.show_profile', [
-            'customer' => $customer,
-            'success' => 'update success <_>!!!!'
-        ]);
+        return back()->withErrors(['avatar' => 'Vui lòng chọn một hình ảnh để cập nhật avatar.']);
     }
 
 
+
+
+
+    // $customer = Customer::findOrFail($id);
+
+    //     // Validate dữ liệu
+    //     $validatedData = $request->validate([
+    //         'TenKH' => 'required|string',
+    //         'SoDienThoai' => 'required|string',
+    //         'Email' => 'required|email',
+    //         'DiaChi' => 'required|string',
+    //         'Password_hs5' => 'required|string',
+    //         'GioiTinh' => 'required|in:Nam,Nữ',
+    //         'TrangThai' => 'required|boolean',
+    //         'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //     ]);
+
+    //     if ($request->hasFile('avatar')) {
+    //         try {
+    //             $result = Cloudinary::upload($request->file('avatar')->getRealPath(), [
+    //                 'folder' => 'Avatar',
+    //             ]);
+
+    //             if ($customer) {
+    //                 $imageUrl = $customer->avatar;
+
+    //                 preg_match('/\/v\d+\/(.+?)\.[a-zA-Z0-9]{3,4}$/', $imageUrl, $matches);
+    //                 $publicId = isset($matches[1]) ? $matches[1] : null;
+
+    //                 if ($publicId) {
+    //                     Cloudinary::destroy($publicId);
+    //                 }
+    //             }
+
+    //             $validatedData['avatar'] = $result->getSecurePath();
+    //         } catch (\Exception $e) {
+    //             return back()->withErrors(['success' => 'Failed to update avatar.']);
+    //         }
+    //     }
+
+    //     $customer->update($validatedData);
 
 
 

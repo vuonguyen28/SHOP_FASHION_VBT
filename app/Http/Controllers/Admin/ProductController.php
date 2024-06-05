@@ -35,19 +35,22 @@ class ProductController extends Controller
     // }
     public function index(Request $request)
     {
-        // $product = Product::paginate(10);
-        // return view('admin.product.index', compact('product'))->with('i', (request()->input('page', 1) -1) * 10);
-        // mặc định là 10
+        $keyword = $request->input('keyword');
+
         $perPage = $request->input('per_page', 10);
 
-        // Lấy danh sách sản phẩm + phân trang
-        $product = Product::paginate($perPage);
+        $query = Product::query();
 
-        // Trả về view với danh sách sản phẩm và giá trị per_page
-        return view('admin.product.index', compact('product'))
-            ->with('i', (request()->input('page', 1) - 1) * $perPage)
+        if ($keyword) {
+            $query->where('TenSP', 'like', "%$keyword%");
+        }
+
+        $product = $query->paginate($perPage);
+
+        return view('admin.product.index', compact('product', 'keyword'))
             ->with('perPage', $perPage);
     }
+
     /**
      * Show the form for creating a new resource.
      */

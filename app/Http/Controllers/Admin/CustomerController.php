@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 
@@ -11,7 +12,7 @@ class CustomerController extends Controller
 {
     public function showCustomers()
     {
-        $customers = Customer::where('Role','User')->get();
+        $customers = Customer::where('Role', 'User')->get();
         return view('admin.customers.show', ['customers' => $customers]);
     }
 
@@ -22,9 +23,49 @@ class CustomerController extends Controller
     }
 
     // add customers 
+    // public function addCustomer(Request $request)
+    // {
+    //     // Validate dữ liệu
+    //     $validatedData = $request->validate([
+    //         'TenKH' => 'required|string',
+    //         'SoDienThoai' => 'required|string',
+    //         'Email' => 'required|email',
+    //         'DiaChi' => 'required|string',
+    //         'Password_hs5' => 'required|string',
+    //         'GioiTinh' => 'required|in:Nam,Nữ',
+    //         'TrangThai' => 'required|boolean',
+    //         'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+    //     ]);
+    //     // Xử lý file ảnh tải lên
+    //     if ($request->hasFile('avatar')) {
+    //         $file = $request->file('avatar');
+    //         $fileNameToStore = $file->getClientOriginalName();
+    //         $fileNameToStore = pathinfo($fileNameToStore, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
+    //         $file->move(public_path('avatars'), $fileNameToStore);
+    //     } else {
+    //         // Xử lý nếu không có avata
+    //         dd("Không có file avata được tải lên.");
+    //         $fileNameToStore = 'noImage.jpg';
+    //     }
+
+    //     // Gắn tên tệp hình ảnh vào dữ liệu được xác thực
+    //     $validatedData['avatar'] = $fileNameToStore;
+    //     // Set default role
+    //     $validatedData['Role'] = 'user';
+    //     Customer::create($validatedData);
+
+    //     // Lấy lại danh sách khách hàng để trả về view
+    //     $customers = Customer::all();
+    //     return view('admin.customers.show', ['customers' => $customers, 'success' => 'Customer added successfully.']);
+    // }
+
+
+
+
     public function addCustomer(Request $request)
     {
-        // Validate dữ liệu
+        // Validate the data
         $validatedData = $request->validate([
             'TenKH' => 'required|string',
             'SoDienThoai' => 'required|string',
@@ -34,28 +75,24 @@ class CustomerController extends Controller
             'GioiTinh' => 'required|in:Nam,Nữ',
             'TrangThai' => 'required|boolean',
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
         ]);
-        // Xử lý file ảnh tải lên
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $fileNameToStore = $file->getClientOriginalName();
-            $fileNameToStore = pathinfo($fileNameToStore, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('avatars'), $fileNameToStore);
-        } else {
-            // Xử lý nếu không có avata
-            dd("Không có file avata được tải lên.");
-            $fileNameToStore = 'noImage.jpg';
+
+        try {
+            $result = Cloudinary::upload($request->file('avatar')->getRealPath(), [
+                'folder' => 'Avatar',
+            ]);
+
+            $validatedData['avatar'] = $result->getSecurePath();
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['avatar' => 'Failed to upload avatar.']);
         }
 
-        // Gắn tên tệp hình ảnh vào dữ liệu được xác thực
-        $validatedData['avatar'] = $fileNameToStore;
-        // Set default role
         $validatedData['Role'] = 'user';
+
         Customer::create($validatedData);
 
-        // Lấy lại danh sách khách hàng để trả về view
         $customers = Customer::all();
+
         return view('admin.customers.show', ['customers' => $customers, 'success' => 'Customer added successfully.']);
     }
 
@@ -102,26 +139,40 @@ class CustomerController extends Controller
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Nếu có tệp hình mới được tải lên
         if ($request->hasFile('avatar')) {
-            // Xóa hình ảnh cũ
-            if (file_exists(public_path('avatars/' . $customer->avatar))) {
-                unlink(public_path('avatars/' . $customer->avatar));
+            try {
+                $result = Cloudinary::upload($request->file('avatar')->getRealPath(), [
+                    'folder' => 'Avatar',
+                ]);
+
+                if ($customer) {
+                    $imageUrl = $customer->avatar;
+
+                    preg_match('/\/v\d+\/(.+?)\.[a-zA-Z0-9]{3,4}$/', $imageUrl, $matches);
+                    $publicId = isset($matches[1]) ? $matches[1] : null;
+
+                    if ($publicId) {
+                        Cloudinary::destroy($publicId);
+                    }
+                }
+               
+                $validatedData['avatar'] = $result->getSecurePath();
+            } catch (\Exception $e) {
+                return back()->withErrors(['success' => 'Failed to update avatar.']);
             }
-
-            // Lưu hình ảnh mới
-            $file = $request->file('avatar');
-            $fileNameToStore = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('avatars'), $fileNameToStore);
-
-            // Cập nhật avatar mới
-            $validatedData['avatar'] = $fileNameToStore;
-        } else {
-            dd("Không có file avata được tải lên.");
         }
 
-        // Cập nhật thông tin khách hàng
         $customer->update($validatedData);
+
         return redirect()->route('customers.show')->with('success', 'Customer updated successfully.');
+    }
+
+
+
+    private function getPublicIdFromUrl($imageUrl)
+    {
+        // Trích xuất public ID từ URL hình ảnh
+        preg_match('/\/v\d+\/(.+?)\.[a-zA-Z0-9]{3,4}$/', $imageUrl, $matches);
+        return isset($matches[1]) ? $matches[1] : null;
     }
 }

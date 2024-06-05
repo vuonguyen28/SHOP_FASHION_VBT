@@ -151,7 +151,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('product.show');
 
     //search
-    Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/product/search', [ProductController::class, 'index'])->name('product.search');
 
     //import product form excel
     Route::get('/product/import', [ProductController::class, 'import'])->name('product.import');

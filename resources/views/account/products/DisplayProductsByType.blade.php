@@ -40,11 +40,11 @@
                                 @endif
                                 <div class="sale__prooduct--img">
                                     @foreach ($product->images->take(1) as $image)
-                                        <img class="img_sale1" src="{{ asset('product/' . $image->hinhanh) }}"
+                                        <img class="img_sale1" src="{{$image->hinhanh }}"
                                             alt="">
                                     @endforeach
                                     @foreach ($product->images->skip(1)->take(1) as $image)
-                                        <img class="img_sale2" src="{{ asset('product/' . $image->hinhanh) }}"
+                                        <img class="img_sale2" src="{{  $image->hinhanh }}"
                                             alt="">
                                     @endforeach
                                 </div>
@@ -67,8 +67,8 @@
                                 </div>
 
                                 <div class="sale__card--btn">
-                                    <a href="#">Buy now</a>
-                                    <a href="#">Add to cart</a>
+                                    <a href="{{ route('product.SeeProductDetails', ['id' => $product->MaSP]) }}">Mua Ngay</a>
+                                    <a href="{{ route('product.SeeProductDetails', ['id' => $product->MaSP]) }}">Thêm vào giỏ</a>
                                 </div>
                             </div>
 

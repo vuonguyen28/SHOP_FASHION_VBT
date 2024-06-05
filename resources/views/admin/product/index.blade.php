@@ -8,21 +8,70 @@
         </div>
     @endif
 
+    <style>
+        .btn_importExcel {
+            background-color: #fff;
+            border: 2px solid greenyellow;
+            color: black;
+            padding: 5px;
+            font-weight: bold;
+            box-shadow: 1px 1px 1px black;
+        }
+
+        .btn__createNew {
+            background-color: #fff;
+            border: 2px solid rgb(98, 0, 255);
+            color: black;
+            padding: 5px;
+            font-weight: bold;
+            margin-right: 20px;
+            box-shadow: 1px 1px 1px black;
+        }
+
+        .btn__create_import {
+            margin: 10px
+        }
+
+        .dropdown__choose--quantity {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            height: 100%;
+        }
+
+        .dropdown__choose--quantity select {
+            width: 100px;
+            padding: 3px;
+        }
+
+        .checkbox__select--all {
+            background: #fff;
+            border: 2px solid black;
+            width: 120px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .btn__delete--choose{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #delete-selected {
+            margin: 0;
+        }
+    </style>
 
 
-    <!-- Checkbox để chọn tất cả -->
-    <input type="checkbox" id="select-all" class="mr-2">
-    <label for="select-all">Chọn tất cả</label>
 
-    <!-- Nút xóa -->
-    <button type="button" id="delete-selected" class="btn btn-danger d-none">
-        <i class='bx bx-trash'></i> Xóa đã chọn
-    </button>
+
 
 
     <div class="container-fuil mt-3">
         <center>
-            <h4>LIST PRODUCT</h4>
+            <h1><b>LIST PRODUCT</b></h1>
         </center>
         <!-- Thêm ô nhập liệu tìm kiếm -->
         <div class="row mt-3 mb-3">
@@ -36,12 +85,57 @@
             </div>
         </div>
         <!-- End Thêm ô nhập liệu tìm kiếm -->
-        <a class="btn btn-primary" href="{{ route('product.store') }}">
-            <i class='bx bxs-add-to-queue'></i> create
-        </a>
-        <a class="btn btn-primary" href="{{ route('product.import') }}">
-            <i class='bx bxs-add-to-queue'></i> Import
-        </a>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="checkbox__select--all">
+                    <input type="checkbox" id="select-all" class="mr-2">
+                    <label for="select-all">Chọn tất cả</label>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <!-- Nút xóa -->
+                <div class="btn__delete--choose">
+                    <button type="button" id="delete-selected" class="btn btn-danger d-none">
+                        <i class='bx bx-trash'></i> Xóa đã chọn
+                    </button>
+                </div>
+            </div>
+
+            <!-- Checkbox để chọn tất cả -->
+            <div class="col-md-3">
+                <div class="btn__create_import">
+                    <a class="btn__createNew" href="{{ route('product.store') }}">
+                        <i class='bx bxs-add-to-queue'></i> create
+                    </a>
+                    <a class="btn_importExcel" href="{{ route('product.import') }}">
+                        <img src="{{ asset('images/iconexcel.png') }}" width="25"> Import
+                    </a>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col-md-3">
+                <!-- Select  chọn số lượng sản phẩm hiển thị mỗi trang -->
+                <div class="dropdown__choose--quantity">
+                    <p><b>Số sản phẩm / trang:</b></p>
+                    <form action="{{ route('product.index') }}" method="GET" id="perPageForm">
+                        <select name="per_page" id="perPageSelect" class="form-control"
+                            onchange="document.getElementById('perPageForm').submit();">
+                            <option value="10"{{ $perPage == 10 ? ' selected' : '' }}>10</option>
+                            <option value="20"{{ $perPage == 20 ? ' selected' : '' }}>20</option>
+                            <option value="50"{{ $perPage == 50 ? ' selected' : '' }}>50</option>
+                            <option value="100"{{ $perPage == 100 ? ' selected' : '' }}>100</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+        </div>
 
         <div class="table-wrapper" style="height: 500px; overflow:auto; position:relative">
             <table class="table">
@@ -70,8 +164,7 @@
                             <td>{{ $p->MaSP }}</td>
                             <td>
                                 @foreach ($p->images->take(1) as $image)
-                                    <img width="70px" height="auto" src="{{ $image->hinhanh }}"
-                                        alt="">
+                                    <img width="70px" height="auto" src="{{ $image->hinhanh }}" alt="">
                                 @endforeach
                             </td>
                             <td>{{ $p->TenSP }}</td>
@@ -128,24 +221,8 @@
         </div>
 
         <!-- phân trang -->
-        <div class="row">
-            <div class="col-md-4">
-                {{ $product->appends(['per_page' => $perPage])->links() }}
-            </div>
-            <!-- Select  chọn số lượng sản phẩm hiển thị mỗi trang -->
-
-            <div class="col-md-3 d-flex" style="margin-left: 60px; width:30%">
-                <form action="{{ route('product.index') }}" method="GET" id="perPageForm">
-                    <select name="per_page" id="perPageSelect" class="form-control"
-                        onchange="document.getElementById('perPageForm').submit();">
-                        <option value="10"{{ $perPage == 10 ? ' selected' : '' }}>10</option>
-                        <option value="20"{{ $perPage == 20 ? ' selected' : '' }}>20</option>
-                        <option value="50"{{ $perPage == 50 ? ' selected' : '' }}>50</option>
-                        <option value="100"{{ $perPage == 100 ? ' selected' : '' }}>100</option>
-                    </select>
-                    <span style="margin-left: 10px;">sản phẩm/trang</span>
-                </form>
-            </div>
+        <div class="row" style="margin: 10px;">
+            {{ $product->appends(['per_page' => $perPage])->links() }}
         </div>
     </div>
 
