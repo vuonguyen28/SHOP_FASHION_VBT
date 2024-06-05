@@ -145,7 +145,7 @@
                                         <input hidden name="TenSP" value="{{ $product->TenSP }}">
                                         <p>{{ $product->TenSP }}</p>
                                         <hr style="border: 1px solid black">
-                                        <h5>Đã bán: 999 | Lượt đánh giá: &nbsp;{{ $totalFeedback }}</h5>
+                                        <h5>Đã bán: {{ $totalSold }} | Lượt đánh giá: &nbsp;{{ $totalFeedback }}</h5>
                                         {{-- average --}}
                                         <div>
 

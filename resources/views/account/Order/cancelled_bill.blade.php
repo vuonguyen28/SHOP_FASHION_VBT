@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Delivery fee --}}
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <p>Phí vận chuyển:</p>
                     <h6>{{ $item->PhiVanChuyen }}</h6>
                 </div>
@@ -130,23 +130,17 @@
                 </div>
 
                 {{-- Button to see details --}}
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div class="bill__info--btn">
-                        <form action="{{ route('bill.ShowDeliveredBill_Detail_Bill') }}" method="POST">
+                        <form action="{{ route('bill.ShowCancelledBill_Detail_Bill') }}" method="POST">
                             @csrf
                             <input type="hidden" value="{{ $item->MaDonHang }}" name="MaDonHang">
                             <button class="btn_seeDetail"><a>Chi tiết</a></button>
                         </form>
                         <br>
-                        <form method="POST" action="{{ route('Order.CancelOrder') }}">
-                            @csrf
-                            <input name="MaDonHang" hidden value="{{  $item->MaDonHang  }}">
-                            <button class="btn_cancel"><a>Hủy đơn</a></button>
-                        </form>
-                        
                     </div>
                 </div>
-                
+
             </div>
         @endforeach
 
@@ -158,7 +152,13 @@
                     {{-- product img --}}
                     <div class="col-md-2">
                         <div class="bill__img--product">
-                            <img src="{{ asset('images/products/ao1.png') }}">
+                            @if ($item->ProductDetails && $item->ProductDetails->Product && $item->ProductDetails->Product->images)
+                                @foreach ($item->ProductDetails->Product->images->take(1) as $img)
+                                    <img src="{{ $img->hinhanh }}">
+                                @endforeach
+                            @else
+                                <p>No images found for this product.</p>
+                            @endif
                         </div>
                     </div>
                     {{-- product info --}}

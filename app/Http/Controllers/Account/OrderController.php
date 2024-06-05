@@ -506,7 +506,7 @@ class OrderController extends Controller
                         if (is_null($item->ProductDetails->Product->PhanTramGiamGia)) {
                             $money = $item->ProductDetails->Product->Gia * $item->SoLuong;
                         } else {
-                            $money -= (($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100) * $item->SoLuong;
+                            $money = ($money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100) * $item->SoLuong;
                         }
                         $total += $money;
                         $priceShipping = 30000;
@@ -535,7 +535,7 @@ class OrderController extends Controller
                         if (is_null($item->ProductDetails->Product->PhanTramGiamGia)) {
                             $money = $item->ProductDetails->Product->Gia;
                         } else {
-                            $money -= ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100;
+                            $money =$money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100;
                         }
 
                         OrderDetails::create([
@@ -640,7 +640,7 @@ class OrderController extends Controller
                 if (is_null($item->ProductDetails->Product->PhanTramGiamGia)) {
                     $money = $item->ProductDetails->Product->Gia * $item->SoLuong;
                 } else {
-                    $money -= (($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100) * $item->SoLuong;
+                    $money = ($money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100) * $item->SoLuong;
                 }
                 $total += $money;
                 $priceShipping = 30000;

@@ -91,19 +91,19 @@
             <table class="table">
                 <thead class="table-success">
                     <tr>
-                        <th>MÃ ĐƠN</th>
-                        <th>MÃ KHÁCH HÀNG</th>
-                        <th>NGÀY ĐẶT</th>
-                        <th>NGÀY GIAO DỰ KIẾN</th>
-                        <th>TỔNG GIÁ</th>
-                        <th>TỔNG TIỀN SAU GIẢM</th>
-                        <th>PHÍ VẬN CHUYỂN</th>
-                        <th>TRẠNG THÁI THANH TOÁN</th>
-                        <th>HÌNH THỨC THANH TOÁN</th>
-                        <th>TRẠNG THÁI ĐƠN</th>
-                        <th>ĐỊA CHỈ</th>
-                        <th>MÃ VOUCHER</th>
-                        <th>SỐ ĐIỆN THOẠI</th>
+                        <th>#</th>
+                        <th>Tên Khách hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Ngày dự kiến giao</th>
+                        <th>Tổng giá</th>
+                        <th>Giảm áp dụng vouhcer</th>
+                        <th>Phí vận chuyển</th>
+                        <th>Trạng thái thanh toán</th>
+                        <th>Hình thức thanh toán</th>
+                        <th>Trạng thái đơn hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>Voucher áp dụng</th>
+                        <th>Phone</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -112,7 +112,7 @@
                     @foreach ($orders as $item)
                         <tr style="font-size: 12px">
                             <td>{{ $item->MaDonHang }}</td>
-                            <td>{{ $item->MaKhachHang }}</td>
+                            <td>{{ $item->Customer->TenKH }}</td>
                             <td>{{ $item->NgayDat }}</td>
                             <td>{{ $item->NgayDuKienGiaoHang }}</td>
                             <td>{{ $item->TongGia }}</td>

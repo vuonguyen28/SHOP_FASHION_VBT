@@ -158,7 +158,14 @@
                     {{-- product img --}}
                     <div class="col-md-2">
                         <div class="bill__img--product">
-                            <img src="{{ asset('images/products/ao1.png') }}">
+                            @if ($item->ProductDetails && $item->ProductDetails->Product && $item->ProductDetails->Product->images)
+                                @foreach ($item->ProductDetails->Product->images->take(1) as $img)
+                                    <img src="{{ $img->hinhanh }}">
+                                @endforeach
+                            @else
+                                <p>No images found for this product.</p>
+                            @endif
+
                         </div>
                     </div>
                     {{-- product info --}}

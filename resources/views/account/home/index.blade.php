@@ -100,46 +100,17 @@
 
             <div class="col-md-8 trending__product--slider" id="trending_slide">
 
-                <div class="trending__product--card">
-                    <img src="{{ asset('/images/products/ao1.png') }}" alt="">
-                    <div class="trending__product--card-info">
-                        <p>Áo polo</p>
-                        <a href="#">Xem chi tiết</a>
-                    </div>
-                </div>
-                <!-- Thêm thêm các div trending__product--card cho các sản phẩm khác -->
-                <div class="trending__product--card">
-                    <img src="{{ asset('/images/products/ao1.png') }}" alt="">
-                    <div class="trending__product--card-info">
-                        <p>Áo polo</p>
-                        <a href="#">Xem chi tiết</a>
-                    </div>
-                </div>
+                @foreach ($products as $product)
+                    <div class="trending__product--card">
+                        @foreach ($product->images->take(1) as $image)
+                            <img class="img_sale1" src="{{ $image->hinhanh }}" alt="">
+                        @endforeach
 
-                <div class="trending__product--card">
-                    <img src="{{ asset('/images/products/ao1.png') }}" alt="">
-                    <div class="trending__product--card-info">
-                        <p>Áo polo</p>
-                        <a href="#">Xem chi tiết</a>
+                        <div class="trending__product--card-info">
+                            <h5 style="color: #fff; margin-top:5px;">{{ $product->TenSP }}</h5>
+                        </div>
                     </div>
-                </div>
-
-                <div class="trending__product--card">
-                    <img src="{{ asset('/images/products/ao1.png') }}" alt="">
-                    <div class="trending__product--card-info">
-                        <p>Áo polo</p>
-                        <a href="#">Xem chi tiết</a>
-                    </div>
-                </div>
-
-                <div class="trending__product--card">
-                    <img src="{{ asset('/images/products/ao1.png') }}" alt="">
-                    <div class="trending__product--card-info">
-                        <p>Áo polo</p>
-                        <a href="#">Xem chi tiết</a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
 
@@ -153,16 +124,16 @@
                 <p>Sản Phẩm Đang Sale <i class='bx bx-purchase-tag'></i></p>
             </div>
             @foreach ($products as $product)
-            <div class="col-6 col-lg-3 col-md-4 col-sm-6">
+                <div class="col-6 col-lg-3 col-md-4 col-sm-6">
 
-                <div class="sale__product--card col-lg-3 col-md-4 col-sm-6 xs-6 col-6">
+                    <div class="sale__product--card col-lg-3 col-md-4 col-sm-6 xs-6 col-6">
                         <div class="sale__sale-tag">-{{ $product->PhanTramGiamGia }}%</div>
                         <div class="sale__prooduct--img">
                             @foreach ($product->images->take(1) as $image)
-                                <img class="img_sale1" src="{{  $image->hinhanh }}" alt="">
+                                <img class="img_sale1" src="{{ $image->hinhanh }}" alt="">
                             @endforeach
                             @foreach ($product->images->skip(1)->take(1) as $image)
-                                <img class="img_sale2" src="{{  $image->hinhanh }}" alt="">
+                                <img class="img_sale2" src="{{ $image->hinhanh }}" alt="">
                             @endforeach
                         </div>
                         <div class="sale__product--name">
@@ -190,9 +161,25 @@
             </div>
         </div>
         {{-- end sale product --}}
-        
+
 
     </section>
+
+    {{-- @foreach ($topProducts as $product)
+        <li>
+            <h2>{{ $product->TenSP }}</h2>
+            <p>Total Quantity Sold: {{ $product->total_quantity }}</p>
+            <p>Price: {{ $product->Gia }}</p>
+            <p>Description: {{ $product->MoTa }}</p>
+        </li>
+    @endforeach --}}
+
+    @foreach ($topProducts as $product)
+        <li>
+            <h3>{{ $product->TenSP }}</h3>
+            <img src="{{ $product->HinhAnh }}" alt="{{ $product->TenSP }}">
+        </li>
+    @endforeach
 
 @endsection
 {{--  end section content --}}

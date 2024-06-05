@@ -9,10 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table ='SanPham';
-    protected $primaryKey='MaSP';
-    protected $fillable =['TenSP', 'Gia', 'PhanTramGiamGia', 'MoTa', 'MaDanhMuc', 'MaNhaCungCap', 'TrinhTrang'];
-    public $timestamps=false;
+    protected $table = 'SanPham';
+    protected $primaryKey = 'MaSP';
+    protected $fillable = ['TenSP', 'Gia', 'PhanTramGiamGia', 'MoTa', 'MaDanhMuc', 'MaNhaCungCap', 'TrinhTrang'];
+    public $timestamps = false;
 
     public function Category()
     {
@@ -24,11 +24,16 @@ class Product extends Model
     }
     public function images()
     {
-        return $this->hasMany(Image::class,'MaSP');
+        return $this->hasMany(Image::class, 'MaSP', 'MaSP');
     }
 
     public function ProductDetails()
     {
-        return $this->hasMany(ProductDetails::class, 'MaSP');
+        return $this->hasMany(ProductDetails::class, 'MaSP', 'MaSP');
+    }
+
+    public function firstImage()
+    {
+        return $this->hasOne(Image::class, 'MaSP')->orderBy('MaHinhAnh');
     }
 }

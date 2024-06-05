@@ -59,4 +59,9 @@ class OrderDetails extends Model
             'MaSP' // Local key on ProductDetails table
         );
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'MaDonHang', 'MaDonHang');
+    }
 }

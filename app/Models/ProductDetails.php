@@ -16,7 +16,7 @@ class ProductDetails extends Model
 
     public function Product()
     {
-        return $this->belongsTo(Product::class, 'MaSP');
+        return $this->belongsTo(Product::class, 'MaSP','MaSP');
     }
 
     public function Size()

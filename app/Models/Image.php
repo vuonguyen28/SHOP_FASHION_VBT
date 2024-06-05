@@ -15,6 +15,9 @@ class Image extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'MaSP');
+        return $this->belongsTo(Product::class, 'MaSP','MaSP');
     }
+
+    
+    
 }
