@@ -21,6 +21,12 @@ use App\Http\Controllers\Account\ProfileController;
 use App\Http\Controllers\Account\BillController;
 use App\Http\Controllers\Account\FeedbackController;
 
+use App\Http\Controllers\Admin\TestController;
+//demo
+Route::get('/test', [TestController::class, 'index']);
+Route::post('/upload', [TestController::class, 'upload']);
+
+
 
 
 

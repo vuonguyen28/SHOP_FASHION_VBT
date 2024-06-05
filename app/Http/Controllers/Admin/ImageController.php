@@ -7,6 +7,9 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 
 class ImageController extends Controller
@@ -33,20 +36,20 @@ class ImageController extends Controller
             // Xử lý nhiều file ảnh được tải lên
             if ($request->hasFile('hinhanh')) {
                 foreach ($request->file('hinhanh') as $file) {
-                    $fileNameToStore = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $file->move(public_path('product'), $fileNameToStore);
+                    // Tải lên hình ảnh lên Cloudinary
+                    $result = Cloudinary::upload($file->getRealPath(), [
+                        'folder' => 'Shop', // Thư mục trên Cloudinary để lưu trữ hình ảnh
+                    ]);
+                    // Lưu URL của hình ảnh vào cơ sở dữ liệu
                     Image::create([
                         'MaSP' => $validatedData['MaSP'],
-                        'hinhanh' => $fileNameToStore,
+                        'hinhanh' => $result->getSecurePath(), // URL an toàn để truy cập hình ảnh từ Cloudinary
                     ]);
                 }
             }
 
-            $imageData = Image::where('MaSP', $validatedData['MaSP'])->get();
-
-            return view('admin.image.index', ['image' => $imageData, 'MaSP' => $validatedData['MaSP'], 'success' => 'Hình ảnh đã được thêm thành công.']);
+            return redirect()->route('image.show', ['MaSP' => $validatedData['MaSP']])->with('success', 'Hình ảnh đã được thêm thành công.');
         } catch (ValidationException $e) {
-            // Nếu có lỗi xảy ra trong quá trình xử lý
             $errors = $e->validator->errors()->all();
             return back()->withErrors($errors)->withInput();
         }
@@ -72,6 +75,35 @@ class ImageController extends Controller
     public function update(Request $request, string $id)
     {
     }
+    // public function destroy(Request $request)
+    // {
+    //     $selectedIds = $request->input('selectedIds');
+
+    //     // Kiểm tra xem có hình ảnh nào được chọn không
+    //     if (!empty($selectedIds)) {
+    //         foreach ($selectedIds as $id) {
+    //             $image = Image::find($id);
+
+    //             // Kiểm tra xem hình ảnh có tồn tại không trước khi xóa
+    //             if ($image) {
+    //                 // Xóa hình ảnh từ thư mục lưu trữ
+    //                 if (file_exists(public_path('product/' . $image->hinhanh))) {
+    //                     unlink(public_path('product/' . $image->hinhanh));
+    //                 }
+
+    //                 // Xóa hình ảnh khỏi cơ sở dữ liệu
+    //                 $image->delete();
+    //             }
+    //         }
+
+    //         return redirect()->back()->with('success', 'Các hình ảnh đã được xóa thành công.');
+    //     } else {
+    //         return redirect()->back()->with('error', 'Vui lòng chọn ít nhất một hình ảnh để xóa.');
+    //     }
+    // }
+
+
+
     public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
@@ -83,19 +115,26 @@ class ImageController extends Controller
 
                 // Kiểm tra xem hình ảnh có tồn tại không trước khi xóa
                 if ($image) {
-                    // Xóa hình ảnh từ thư mục lưu trữ
-                    if (file_exists(public_path('product/' . $image->hinhanh))) {
-                        unlink(public_path('product/' . $image->hinhanh));
-                    }
+                    // Lấy URL của hình ảnh từ cơ sở dữ liệu
+                    $imageUrl = $image->hinhanh;
 
-                    // Xóa hình ảnh khỏi cơ sở dữ liệu
-                    $image->delete();
+                    // Trích xuất public ID từ URL hình ảnh
+                    preg_match('/\/v\d+\/(.+?)\.[a-zA-Z0-9]{3,4}$/', $imageUrl, $matches);
+                    $publicId = isset($matches[1]) ? $matches[1] : null;
+
+                    if ($publicId) {
+                        // Xóa hình ảnh từ Cloudinary
+                        Cloudinary::destroy($publicId);
+
+                        // Xóa hình ảnh khỏi cơ sở dữ liệu
+                        $image->delete();
+                    }
                 }
             }
 
             return redirect()->back()->with('success', 'Các hình ảnh đã được xóa thành công.');
         } else {
-            return response()->json(['success' => false, 'message' => 'Vui lòng chọn ít nhất một hình ảnh để xóa.'], 400);
+            return redirect()->back()->with('error', 'Vui lòng chọn ít nhất một hình ảnh để xóa.');
         }
     }
 }

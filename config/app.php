@@ -129,11 +129,12 @@ return [
     //     Maatwebsite\Excel\ExcelServiceProvider::class,
     // ],
     
-    // 'aliases' => [
-    //     // Other Facades
+    'aliases' => [
+        // Other Facades
     
-    //     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-    // ],
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Cloudinary'=>CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
+    ],
     
 
 ];
