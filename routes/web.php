@@ -215,6 +215,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/order/index', [OrderAdminController::class, 'index'])->name('order.index');   
     Route::post('/order/edit', [OrderAdminController::class, 'edit'])->name('order.edit');
     Route::post('/order/update', [OrderAdminController::class, 'update'])->name('order.update');
+
+    Route::post('/order/index',[OrderAdminController::class, 'index'])->name('order.index');
+    
     
 });
 

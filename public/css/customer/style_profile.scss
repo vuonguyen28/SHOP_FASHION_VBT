@@ -5,6 +5,7 @@
     align-items: center;
     padding: 10px;
     background-color: #fff;
+    box-shadow: 2px 2px 2px black;
 
     .form__edit--profile-avatar {
         .profile__avatar {
@@ -17,12 +18,7 @@
         }
 
         .profile__btn--choose-avatar {
-
-            input {
-                display: none;
-
-            }
-            label {
+            button {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -32,21 +28,25 @@
                 border: 1px dashed black;
                 margin: 20px;
                 cursor: pointer;
+                font-weight: bold;
             }
-            label:hover {
+
+            button:hover {
                 color: red;
                 border: 1px dashed red;
             }
         }
 
-       
+
     }
-    .form__edit--btn{
+
+    .form__edit--btn {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
-        button{
+
+        button {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,12 +57,63 @@
             font-weight: bold;
             border-radius: 10px;
             font-size: 15px;
-            i{
+
+            i {
                 font-size: 20px;
             }
         }
-        button:hover{
+
+        button:hover {
             box-shadow: 1px 1px 2px black;
+        }
+
+    }
+
+    .form__edit--info {
+
+        border: 1px solid black;
+
+        .btn_edit_info {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+        }
+
+        .form__edit--info-col1 {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                i {
+                    @extend .btn_edit_info;
+                }
+            }
+
+        }
+
+        .form__edit--info-col2 {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                i {
+                    @extend .btn_edit_info;
+                }
+            }
+        }
+
+        .form__edit--info-changepass {
+            background-color: blue;
+            border-radius: 10px;
+            margin: 10px;
+
+            button {
+                padding: 5px;
+                text-align: center;
+                color: #fff;
+                font-weight: bold;
+                font-size: 15px;
+            }
         }
 
     }

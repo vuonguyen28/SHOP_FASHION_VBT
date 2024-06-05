@@ -117,7 +117,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
 }
 .form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_seeDetail {
   border: none;
@@ -125,8 +124,9 @@
   font-weight: bold;
   border-radius: 10px;
   background-color: rgb(26, 204, 26);
-  width: 80%;
+  width: 130px;
   color: #fff;
+  margin-bottom: 5px;
 }
 .form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_seeDetail:hover {
   background-color: rgb(63, 229, 63);
@@ -137,11 +137,24 @@
   font-weight: bold;
   border-radius: 10px;
   background-color: rgb(254, 0, 0);
-  width: 80%;
+  width: 130px;
   color: #fff;
+  margin-bottom: 5px;
 }
 .form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_cancel:hover {
   background-color: rgb(233, 71, 71);
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_location {
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgb(255, 200, 0);
+  width: 130px;
+  color: #fff;
+}
+.form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_location:hover {
+  background-color: #dfb751;
 }
 .form__bill .form__bill--content .form__bill--main .bill__info--btn .btn_feedBack {
   border: none;

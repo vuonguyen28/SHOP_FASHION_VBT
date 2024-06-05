@@ -134,7 +134,7 @@ $saleVoucher = 0;
                                 <div class="col-md-2 col-sm-2 col-2 d-flex justify-content-center align-items-center"
                                     style="height: 100%">
                                     <div class="cart__details--img">
-                                        <img src="{{ asset('product/' . $item['Image']) }}" alt="">
+                                        <img src="{{  $item['Image'] }}" alt="">
                                     </div>
                                 </div>
                                 {{-- details --}}
@@ -251,12 +251,7 @@ $saleVoucher = 0;
                                 <input hidden value="{{ $ShippingMoney }}" name="PhiVanChuyen">
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-
-                {{-- form xác nhận đặt hàng --}}
+                         {{-- form xác nhận đặt hàng --}}
                 <div class="row">
                     <div class="form__confirm">
                         <div class="row">
@@ -335,9 +330,14 @@ $saleVoucher = 0;
                                 type="email" required readonly>
                         </div>
 
-
                     </div>
                 </div>
+                    </div>
+                </div>
+
+
+
+               
 
             </div>
         </div>
@@ -401,7 +401,7 @@ $saleVoucher = 0;
                                     <div class="cart__details--img">
 
                                         @foreach ($cart->ProductDetails->Product->images->take(1) as $image)
-                                            <img src="{{ asset('product/' . $image->hinhanh) }}" alt="">
+                                            <img src="{{  $image->hinhanh }}" alt="">
                                         @endforeach
                                     </div>
 

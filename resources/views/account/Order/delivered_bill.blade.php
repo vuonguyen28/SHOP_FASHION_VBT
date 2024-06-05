@@ -8,14 +8,38 @@
     @include('account.Order.menu_layout_bill')
     @include('account.Order.layout_header_bill')
 
+    <style>
+        .rating {
+            display: inline-block;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
 
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            display: inline-block;
+            padding: 5px;
+            font-size: 24px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .rating label:hover,
+        .rating label:hover~label,
+        .rating input:checked~label {
+            color: #ffcc00;
+        }
+    </style>
     {{-- end header --}}
     {{-- start content --}}
 
     @if (session('success'))
         <script>
             Swal.fire({
-                title: "The Internet?",
+                title: "Thông Báo",
                 text: " {{ session('success') }}",
                 icon: "success"
             });
@@ -181,15 +205,30 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label >Nội Dung FeedBack</label>
+                                                    <label>Nội Dung FeedBack</label>
                                                     <input value="" name="NoiDung" placeholder="text feedback">
                                                 </div>
 
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label >Đánh Giá </label>
                                                     <input type="number" min="1" max="5" name="DanhGia" placeholder="Đánh giá">
+                                                </div> --}}
+                                                <div class="form-group">
+                                                    <label>Đánh Giá</label><br>
+                                                    <div class="rating">
+                                                        <input type="radio" id="star5" name="DanhGia" value="5">
+                                                        <label for="star5">&#9733;</label>
+                                                        <input type="radio" id="star4" name="DanhGia" value="4">
+                                                        <label for="star4">&#9733;</label>
+                                                        <input type="radio" id="star3" name="DanhGia" value="3">
+                                                        <label for="star3">&#9733;</label>
+                                                        <input type="radio" id="star2" name="DanhGia" value="2">
+                                                        <label for="star2">&#9733;</label>
+                                                        <input type="radio" id="star1" name="DanhGia" value="1">
+                                                        <label for="star1">&#9733;</label>
+                                                    </div>
                                                 </div>
-                                               
+s
                                             </div>
 
                                             {{-- Modal Footer --}}
@@ -214,10 +253,6 @@
                 </div>
             @endforeach
         @endif
-        {{-- đặt foreach ở đây --}}
-
-
-        {{-- end form bill  --}}
     </div>
 
 

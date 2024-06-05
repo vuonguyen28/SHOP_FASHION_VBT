@@ -70,7 +70,7 @@
                             <td>{{ $p->MaSP }}</td>
                             <td>
                                 @foreach ($p->images->take(1) as $image)
-                                    <img width="70px" height="auto" src="{{ asset('product/' . $image->hinhanh) }}"
+                                    <img width="70px" height="auto" src="{{ $image->hinhanh }}"
                                         alt="">
                                 @endforeach
                             </td>

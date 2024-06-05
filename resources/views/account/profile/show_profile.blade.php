@@ -41,75 +41,82 @@
                         <img src="{{ asset('avatars/' . $customer->avatar) }}" width="100" height="100"
                             alt="Current Avatar">
                     </div>
-
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateAddressModal_image">
-                        up loding file image
-                    </button>
-
-                    
-
+                    <div class="profile__btn--choose-avatar">
+                        <button type="button" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#updateAddressModal_image">
+                            Upload Image
+                        </button>
+                    </div>
                 </div>
 
                 {{-- infomation --}}
                 <div class="col-md-7 form__edit--info">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6  form__edit--info-col1">
+                            {{-- name --}}
                             <label for="TenKH">Họ và tên:
-                                <button type="button" class="btn" data-bs-toggle="modal"
-                                    data-bs-target="#updateAddressModal_NAME">
-                                    edit
+                                <button type="button" class="btn"
+                                    data-bs-toggle="modal"data-bs-target="#updateAddressModal_NAME">
+                                    <i class='bx bx-edit-alt'></i>
                                 </button>
-
-
                             </label>
                             <input type="text" name="TenKH" value="{{ $customer->TenKH }}" class="form-control"
-                                id="name" placeholder="Enter Name" required>
+                                id="name" placeholder="Enter Name" required readonly>
 
-                        </div>
-
-
-                        <div class="col-md-6">
-                            <label for="GioiTinh">Giới Tính: {{ $customer->GioiTinh }}</label>
-                            <button type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#updateAddressModal_gender">
-                                edit giới tính
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
+                            {{-- phone --}}
                             <label for="SoDienThoai">Số Điện Thoại:
                                 <button type="button" class="btn" data-bs-toggle="modal"
-                                    data-bs-target="#updateAddressModal_Phone">
-                                    edit
+                                    data-bs-target="#updateAddressModal_Phone"><i class='bx bx-edit-alt'></i></button>
                             </label>
                             <input type="text" name="SoDienThoai" value="{{ $customer->SoDienThoai }}"
-                                class="form-control" id="phone" placeholder="Enter Phone" required>
+                                class="form-control" id="phone" placeholder="Enter Phone" required readonly>
+
+
+                            {{-- address  --}}
+                            <label for="DiaChi">Address:
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_Address">
+                                    <i class='bx bx-edit-alt'></i></button>
+                            </label>
+                            <input type="text" name="DiaChi" value="{{ $customer->DiaChi }}" class="form-control"
+                                id="adđress" placeholder="Enter Address" required readonly>
+
+
+                            {{-- btn_change password --}}
+                            <div class="form__edit--info-changepass">
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_Password">Change Password
+                                </button>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6 form__edit--info-col2">
+                            <label for="GioiTinh">Giới Tính:
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_gender">
+                                    <i class='bx bx-edit-alt'></i>
+                                </button>
+                            </label>
+                            <input type="text" name="GioiTinh" value="{{ $customer->GioiTinh }}" class="form-control"
+                                id="gioitinh" placeholder="Enter Gender" required readonly>
+
+                            {{-- email --}}
+                            <label for="Email">Email:
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal_Email">
+                                    <i class='bx bx-edit-alt'></i>
+                                </button>
+                            </label>
+                            <input type="email" name="Email" value="{{ $customer->Email }}" class="form-control"
+                                id="email" placeholder="Enter email" required  readonly>
                         </div>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="Email">Email:<button type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#updateAddressModal_Email">
-                                edit</label>
-                        <input type="email" name="Email" value="{{ $customer->Email }}" class="form-control"
-                            id="email" placeholder="Enter email" required style="width:70%">
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <button type="button" class="btn" data-bs-toggle="modal"
-                            data-bs-target="#updateAddressModal_Password">update Password</button>
-                    </div>
 
-                    <div class="mb-3 mt-3">
-                        <label for="DiaChi">Address:
-                            <button type="button" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#updateAddressModal_Address">
-                                edit
-                        </label>
-                        <input type="text" name="DiaChi" value="{{ $customer->DiaChi }}" class="form-control"
-                            id="adđress" placeholder="Enter Address" required style="width:90%">
-                    </div>
+
                 </div>
             </div>
 

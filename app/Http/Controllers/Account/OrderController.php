@@ -654,7 +654,7 @@ class OrderController extends Controller
                 'TongGia' => $total,
                 'TongTienSauKhiGiamGia' => session('sumTotalMoney_SALE'),
                 'PhiVanChuyen' => $priceShipping,
-                'TrangThaiThanhToan' => '1',
+                'TrangThaiThanhToan' => 'chưa thanh toán',
                 'HinhThucThanhToan' => 'on_delivery',
                 'TrangThaiDonHang' => 'Đã đặt hàng',
                 'DiaChiGiaoHang' => session('LoggedAddress'),

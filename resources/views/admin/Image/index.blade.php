@@ -102,24 +102,17 @@
             <i class='bx bx-trash'></i> Xóa đã chọn
         </button>
 
-        {{-- @foreach ($image as $c)
-            <div class="image-item">
-                <input type="checkbox" class="image-checkbox" data-id="{{ $c->MaHinhAnh }}">
-                <img src="{{ asset('product/' . $c->hinhanh) }}" width="70px" height="70px" alt="Avatar">
-            </div>
-        @endforeach --}}
 
         {{-- new code --}}
         <div class="list__img--product">
             @foreach ($image as $c)
                 <div class="image-item">
                     <input type="checkbox" class="image-checkbox" data-id="{{ $c->MaHinhAnh }}">
-                    <img src="{{ asset('product/' . $c->hinhanh) }}" width="70px" height="70px" alt="Avatar">
+                    <img src="{{ $c->hinhanh }}" width="70px" height="70px" alt="Avatar">
                     <span class="checkmark"></span>
                 </div>
             @endforeach
         </div>
-
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

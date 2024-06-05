@@ -135,7 +135,6 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                height: 100%;
 
                 .btn_seeDetail {
                     border: none;
@@ -143,8 +142,9 @@
                     font-weight: bold;
                     border-radius: 10px;
                     background-color: rgb(26, 204, 26);
-                    width: 80%;
+                    width: 130px;
                     color: #fff;
+                    margin-bottom: 5px;
                 }
 
                 .btn_seeDetail:hover {
@@ -158,12 +158,28 @@
                     font-weight: bold;
                     border-radius: 10px;
                     background-color: rgb(254, 0, 0);
-                    width: 80%;
+                    width: 130px;
                     color: #fff;
+                    margin-bottom: 5px;
                 }
 
                 .btn_cancel:hover {
                     background-color: rgb(233, 71, 71);
+                }
+
+                .btn_location {
+                    border: none;
+                    padding: 5px;
+                    font-weight: bold;
+                    border-radius: 10px;
+                    background-color: rgb(255, 200, 0);
+                    width: 130px;
+                    color: #fff;
+                }
+
+                .btn_location:hover {
+                    background-color: #dfb751;
+
                 }
 
                 .btn_feedBack {
@@ -364,22 +380,22 @@
         margin-bottom: 10px;
         box-shadow: 1px 1px 1px black;
 
-        .bx-package{
+        .bx-package {
             font-size: 40px;
         }
 
-        p{
+        p {
             font-weight: bold;
             text-decoration: underline;
             font-size: 15px;
         }
 
-        h6{
+        h6 {
             font-size: 14px;
         }
 
-        .order__btn--seeDetails{
-            button{
+        .order__btn--seeDetails {
+            button {
                 border: none;
                 background-color: rgb(38, 216, 38);
                 font-weight: bold;
@@ -390,15 +406,17 @@
         }
     }
 
-    .form__details--click{
+    .form__details--click {
         border: 1px solid black;
         box-shadow: 1px 1px 1px black;
-        p{
+
+        p {
             font-size: 15px;
             font-weight: bold;
             text-decoration: underline;
         }
-        h6{
+
+        h6 {
             font-size: 14px;
         }
 

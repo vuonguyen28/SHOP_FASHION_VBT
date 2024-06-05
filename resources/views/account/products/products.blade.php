@@ -53,11 +53,11 @@
                                 @endif
                                 <div class="sale__prooduct--img">
                                     @foreach ($product->images->take(1) as $image)
-                                        <img class="img_sale1" src="{{ asset('product/' . $image->hinhanh) }}"
+                                        <img class="img_sale1" src="{{  $image->hinhanh }}"
                                             alt="">
                                     @endforeach
                                     @foreach ($product->images->skip(1)->take(1) as $image)
-                                        <img class="img_sale2" src="{{ asset('product/' . $image->hinhanh) }}"
+                                        <img class="img_sale2" src="{{  $image->hinhanh }}"
                                             alt="">
                                     @endforeach
                                 </div>

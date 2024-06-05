@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Delivery fee --}}
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <p>Phí vận chuyển:</p>
                     <h6>{{ $item->PhiVanChuyen }}</h6>
                 </div>
@@ -74,10 +74,7 @@
                 <div class="col-md-2">
                     <p>Trạng thái đơn hàng:</p>
                     <h6>{{ $item->TrangThaiDonHang }}</h6>
-                    <button type="button" class="btn" data-bs-toggle="modal"
-                        data-bs-target="#updateAddressModal{{ $item->MaDonHang }}">
-                        cập nhật địa chỉ
-                    </button>
+
                     <h6>{{ $item->DiaChiGiaoHang }}</h6>
                     <p>SĐT nhận hàng: </p>
                     <h6>{{ $item->RecipientPhone }}</h6>
@@ -130,20 +127,23 @@
                 </div>
 
                 {{-- Button to see details --}}
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div class="bill__info--btn">
                         <form action="{{ route('bill.ShowOrdered_Detail_Bill') }}" method="POST">
                             @csrf
                             <input type="hidden" value="{{ $item->MaDonHang }}" name="MaDonHang">
                             <button class="btn_seeDetail"><a>Chi tiết</a></button>
                         </form>
-                        <br>
                         <form method="POST" action="{{ route('Order.CancelOrder') }}">
                             @csrf
-                            <input name="MaDonHang" hidden value="{{  $item->MaDonHang  }}">
+                            <input name="MaDonHang" hidden value="{{ $item->MaDonHang }}">
                             <button class="btn_cancel"><a>Hủy đơn</a></button>
                         </form>
-                        
+                        <button type="button" class="btn btn_location" data-bs-toggle="modal"
+                            data-bs-target="#updateAddressModal{{ $item->MaDonHang }}">
+                            cập nhật địa chỉ
+                        </button>
+
                     </div>
                 </div>
 
@@ -213,8 +213,6 @@
                 </div>
             @endforeach
         @endif
-        {{-- đặt foreach ở đây --}}
-
 
         {{-- end form bill  --}}
     </div>

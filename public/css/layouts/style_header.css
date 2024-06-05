@@ -8,11 +8,14 @@ body {
 }
 
 .header {
-  position: relative; /*Vị trí tương đối - đặt dựa trên vị trí ban đầu*/
+  position: relative;
+  /*Vị trí tương đối - đặt dựa trên vị trí ban đầu*/
   padding: 0 2rem;
-  background-color: rgba(0, 0, 0, 0.1); /* Màu nền trong suốt 10% */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Màu nền trong suốt 10% */
   -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px); /* hiệu ứng làm mờ cho nền */
+          backdrop-filter: blur(10px);
+  /* hiệu ứng làm mờ cho nền */
   z-index: 999;
 }
 
@@ -33,7 +36,8 @@ body {
   font-size: 2rem;
   color: #000;
   cursor: pointer;
-  display: none; /*hide icon bars*/
+  display: none;
+  /*hide icon bars*/
 }
 
 .header__navbar--logo img {
@@ -57,9 +61,12 @@ body {
 }
 .header__navbar--links-nav a:hover {
   background: linear-gradient(45deg, #0D9993, #FF4493);
-  -webkit-background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
-  background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
-  -webkit-text-fill-color: transparent; /* Ẩn màu văn bản gốc */
+  -webkit-background-clip: text;
+  /* Cho phép gradient màu áp dụng vào văn bản */
+  background-clip: text;
+  /* Cho phép gradient màu áp dụng vào văn bản */
+  -webkit-text-fill-color: transparent;
+  /* Ẩn màu văn bản gốc */
 }
 .header__navbar--links-nav a::before {
   content: "";
@@ -106,12 +113,12 @@ body {
   scale: 0.95;
 }
 
-.header__navbar--search {
+.header__navbar--search form {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.header__navbar--search input {
+.header__navbar--search form input {
   padding-left: 10px;
   font-size: 14px;
   height: 35px;
@@ -119,14 +126,14 @@ body {
   border-radius: 10px 0px 0px 10px;
   box-sizing: border-box;
 }
-.header__navbar--search i {
+.header__navbar--search form i {
   font-size: 20px;
   font-weight: bold;
   display: flex;
   vertical-align: middle;
   box-sizing: border-box;
 }
-.header__navbar--search button {
+.header__navbar--search form button {
   height: 35px;
   border-radius: 0 10px 10px 0;
 }
@@ -158,8 +165,10 @@ body {
 
 /* DROPDOWN MENU */
 .header__navbar--dropdown-menu {
-  display: none; /*hide dropdown menu*/
-  position: absolute; /*vị trí tuyệt đối - đặt dựa trên vị trí phần tử mẹ chứa nó*/
+  display: none;
+  /*hide dropdown menu*/
+  position: absolute;
+  /*vị trí tuyệt đối - đặt dựa trên vị trí phần tử mẹ chứa nó*/
   right: 2rem;
   top: 60px;
   height: 0;
@@ -168,12 +177,14 @@ body {
   -webkit-backdrop-filter: blur(15px);
           backdrop-filter: blur(15px);
   border-radius: 10px;
-  overflow: hidden; /*Ẩn nội dung vượt quá kích thước*/
+  overflow: hidden;
+  /*Ẩn nội dung vượt quá kích thước*/
   transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .header__navbar--dropdown-menu li {
   padding: 0.7rem;
-  display: flex; /*Căn chỉnh nội dung*/
+  display: flex;
+  /*Căn chỉnh nội dung*/
   align-items: center;
   justify-content: center;
 }
@@ -188,9 +199,12 @@ body {
 }
 .header__navbar--dropdown-menu a:hover {
   background: linear-gradient(45deg, #0D9993, #FF4493);
-  -webkit-background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
-  background-clip: text; /* Cho phép gradient màu áp dụng vào văn bản */
-  -webkit-text-fill-color: transparent; /* Ẩn màu văn bản gốc */
+  -webkit-background-clip: text;
+  /* Cho phép gradient màu áp dụng vào văn bản */
+  background-clip: text;
+  /* Cho phép gradient màu áp dụng vào văn bản */
+  -webkit-text-fill-color: transparent;
+  /* Ẩn màu văn bản gốc */
 }
 .header__navbar--dropdown-menu a::before {
   content: "";

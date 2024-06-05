@@ -41,15 +41,55 @@
     box-sizing: border-box;
     height: auto;
 
+    .note__product--details {
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: justify;
+        }
+    }
+
     .detail__product--img {
         display: flex;
         justify-content: center;
         align-items: center;
 
         img {
-            width: 60%;
-            height: 60%;
+            width: 50%;
+            height: 80%;
             border: 1px solid black;
+        }
+    }
+
+    .feedback__product {
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .form__feedback {
+
+            .avatar_name_star {
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: 1px solid black;
+                }
+
+                p {
+                    font-weight: bold;
+                    font-size: 15px;
+                    text-align: start;
+                }
+
+
+            }
+
         }
     }
 
@@ -58,11 +98,12 @@
         margin-top: 20px;
         display: flex;
         box-sizing: border-box;
+        height: auto;
 
         img {
             margin: 10px;
             width: 90px;
-            height: 130px;
+            height: 140px;
             transition: all 0.2s;
         }
 
@@ -87,9 +128,12 @@
             font-weight: bold;
         }
 
+
+
         .detail__product--price {
             display: flex;
             align-items: center;
+
             p {
                 font-weight: bold;
                 font-size: 25px;
@@ -154,10 +198,13 @@
                 cursor: pointer;
 
                 // //chặn không cho quét chọn chữ
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none;    /* Firefox */
-                -ms-user-select: none;     /* Internet Explorer/Edge */
-                user-select: none; 
+                -webkit-user-select: none;
+                /* Safari */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* Internet Explorer/Edge */
+                user-select: none;
             }
 
             input {

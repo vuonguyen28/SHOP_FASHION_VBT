@@ -12,6 +12,8 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Validation\ValidationException;
 
 
 class ProductController extends Controller
@@ -60,42 +62,42 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate dữ liệu sản phẩm
-        $validatedData = $request->validate([
-            'TenSP' => 'required|string',
-            'Gia' => 'required|numeric',
-            'PhanTramGiamGia' => 'nullable|numeric',
-            'MoTa' => 'required|string',
-            'MaDanhMuc' => 'required|int',
-            'MaNhaCungCap' => 'required|int',
-            'TrinhTrang' => 'required|string',
-        ]);
+        try {
+            // Validate dữ liệu sản phẩm
+            $validatedData = $request->validate([
+                'TenSP' => 'required|string',
+                'Gia' => 'required|numeric',
+                'PhanTramGiamGia' => 'nullable|numeric',
+                'MoTa' => 'required|string',
+                'MaDanhMuc' => 'required|int',
+                'MaNhaCungCap' => 'required|int',
+                'TrinhTrang' => 'required|string',
+            ]);
 
-        // Tạo sản phẩm mới
-        $product = Product::create($validatedData);
+            // Tạo sản phẩm mới
+            $product = Product::create($validatedData);
 
-
-        //import product from excel
-
-
-
-        // Lưu hình ảnh
-        if ($request->hasFile('hinhanh')) {
-            foreach ($request->file('hinhanh') as $file) {
-                // Lưu hình ảnh vào thư mục public/product
-                $fileNameToStore = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('product'), $fileNameToStore);
-
-                // Tạo bản ghi cho hình ảnh trong cơ sở dữ liệu và liên kết với sản phẩm
-                Image::create([
-                    'MaSP' => $product->MaSP,
-                    'hinhanh' => $fileNameToStore,
-                ]);
+            // Lưu hình ảnh lên Cloudinary
+            if ($request->hasFile('hinhanh')) {
+                foreach ($request->file('hinhanh') as $file) {
+                    // Tải lên hình ảnh lên Cloudinary
+                    $result = Cloudinary::upload($file->getRealPath(), [
+                        'folder' => 'Shop', // Thư mục trên Cloudinary để lưu trữ hình ảnh
+                    ]);
+                    // Lưu URL của hình ảnh vào cơ sở dữ liệu
+                    Image::create([
+                        'MaSP' => $product->MaSP,
+                        'hinhanh' => $result->getSecurePath(), // URL an toàn để truy cập hình ảnh từ Cloudinary
+                    ]);
+                }
             }
-        }
 
-        // Chuyển hướng về trang danh sách sản phẩm với thông báo thành công
-        return redirect()->route('product.index')->with('success', 'Product created successfully.');
+            // Chuyển hướng về trang danh sách sản phẩm với thông báo thành công
+            return redirect()->route('product.index')->with('success', 'Product created successfully.');
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->all();
+            return back()->withErrors($errors)->withInput();
+        }
     }
 
 

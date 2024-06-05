@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Customer;
@@ -9,11 +10,42 @@ use Illuminate\Http\Request;
 
 class OrderAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::all();
-        return view('admin.order.index', compact('orders'));
+        $orderBy = $request->input('orderBy', 'ASC');
+        $state = $request->input('state', 'Tất cả');
+        $paymentMethod = $request->input('paymentMethod', 'Tất cả');
+        $customerPhone = $request->input('customerPhone', '');
+        $address = $request->input('address', '');
+
+        $query = Order::orderBy('NgayDat', $orderBy);
+
+        if ($state !== 'Tất cả') {
+            $query->where('TrangThaiDonHang', $state);
+        }
+
+        if ($paymentMethod !== 'Tất cả') {
+            $query->where('HinhThucThanhToan', $paymentMethod);
+        }
+
+        if (!empty($customerPhone)) {
+            $query->where('RecipientPhone', 'like', '%' . $customerPhone . '%');
+        }
+
+        if (!empty($address)) {
+            $query->where('DiaChiGiaoHang', 'like', '%' . $address . '%');
+        }
+
+        $orders = $query->get();
+
+        return view('admin.order.index', compact('orders', 'orderBy', 'state', 'paymentMethod', 'customerPhone', 'address'));
     }
+
+
+
+
+
+
 
     public function edit(Request $request)
     {
@@ -23,10 +55,12 @@ class OrderAdminController extends Controller
         }
         $customer = Customer::all();
 
-        return view('admin.order.edit', [
-            'order' => $orders, 
-            'customer' => $customer,
-            'id'=> $orders->MaDonHang,
+        return view(
+            'admin.order.edit',
+            [
+                'order' => $orders,
+                'customer' => $customer,
+                'id' => $orders->MaDonHang,
             ]
         );
     }
@@ -41,5 +75,4 @@ class OrderAdminController extends Controller
 
         return redirect()->route('order.index')->with('success', 'Order updated successfully.');
     }
-
 }
