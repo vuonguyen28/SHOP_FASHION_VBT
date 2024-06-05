@@ -115,8 +115,7 @@
                             <div class="col-md-6">
                                 <div class="detail__product--img">
                                     @foreach ($product->images->take(1) as $image)
-                                        <img id="main-product-img" src="{{  $image->hinhanh }}"
-                                            alt="">
+                                        <img id="main-product-img" src="{{ $image->hinhanh }}" alt="">
                                         <input hidden name="Image" type="text" value="{{ $image->hinhanh }}">
                                     @endforeach
                                 </div>
@@ -129,12 +128,41 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="detail__product--action">
+                                        @php
+                                            $totalFeedback = count(
+                                                $product->ProductDetails->flatMap->OrderDetails->flatMap->Feedback,
+                                            );
+                                            $totalFeedback = count(
+                                                $product->ProductDetails->flatMap->OrderDetails->flatMap->Feedback,
+                                            );
+                                            $totalRating = $product->ProductDetails->flatMap->OrderDetails->flatMap->Feedback->sum(
+                                                'DanhGia',
+                                            );
+                                            $averageRating =
+                                                $totalFeedback > 0 ? round($totalRating / $totalFeedback) : 0;
+                                        @endphp
 
                                         <input hidden name="TenSP" value="{{ $product->TenSP }}">
                                         <p>{{ $product->TenSP }}</p>
                                         <hr style="border: 1px solid black">
-                                        <h5>Đã bán: 999 | Lượt đánh giá: 899</h5>
-                                        <div> * * * * *</div>
+                                        <h5>Đã bán: 999 | Lượt đánh giá: &nbsp;{{ $totalFeedback }}</h5>
+                                        {{-- average --}}
+                                        <div>
+
+                                            @if ($averageRating > 0)
+                                                {{-- <p> {{ $averageRating }}</p> --}}
+                                                <div class="rating">
+                                                    @for ($i = 1; $i <= $averageRating; $i++)
+                                                        <span class="star-selected">&#9733;</span>
+                                                    @endfor
+                                                    @for ($i = $averageRating + 1; $i <= 5; $i++)
+                                                        <span class="star">&#9733;</span>
+                                                    @endfor
+                                                </div>
+                                            @else
+                                                <small>Chưa có đánh giá nào cho sản phẩm này.</small>
+                                            @endif
+                                        </div>
                                         <div class="detail__product--price">
                                             @if ($product->PhanTramGiamGia == 0)
                                                 <p>{{ $product->Gia }} vnd</p>
@@ -283,8 +311,7 @@
                                                 <div class="form__feedback">
                                                     <div class="row avatar_name_star">
                                                         <div class="col-md-1">
-                                                            <img
-                                                                src="{{  $feedback->Customer->avatar }}">
+                                                            <img src="{{ $feedback->Customer->avatar }}">
                                                         </div>
                                                         <div class="col-md-11">
                                                             <p>{{ $feedback->Customer->TenKH }}</p>
