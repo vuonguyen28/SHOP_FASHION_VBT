@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Customer;
-
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use SebastianBergmann\Type\NullType;
 
 class OrderAdminController extends Controller
 {
     public function index(Request $request)
     {
+
+        
+
         $orderBy = $request->input('orderBy', 'ASC');
         $state = $request->input('state', 'Tất cả');
         $paymentMethod = $request->input('paymentMethod', 'Tất cả');
@@ -36,13 +40,18 @@ class OrderAdminController extends Controller
             $query->where('DiaChiGiaoHang', 'like', '%' . $address . '%');
         }
 
-        $orders = $query->get();
 
-        return view('admin.order.index', compact('orders', 'orderBy', 'state', 'paymentMethod', 'customerPhone', 'address'));
+        $orderDetail = null;
+        if ($request->id) {
+            $orders = $query->take(1)->get();
+            $orderDetail = OrderDetails::where('MaDonHang', $request->id)->get();
+        } else {
+            $orders = $query->get();
+            $orderDetail = OrderDetails::whereNull('MaDonHang')->get();
+        }
+
+        return view('admin.order.index', compact('orders', 'orderBy', 'state', 'paymentMethod', 'customerPhone', 'address','orderDetail'));
     }
-
-
-
 
 
 

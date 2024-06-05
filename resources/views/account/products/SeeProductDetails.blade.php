@@ -284,7 +284,7 @@
                                                     <div class="row avatar_name_star">
                                                         <div class="col-md-1">
                                                             <img
-                                                                src="{{ asset('avatars/' . $feedback->Customer->avatar) }}">
+                                                                src="{{  $feedback->Customer->avatar }}">
                                                         </div>
                                                         <div class="col-md-11">
                                                             <p>{{ $feedback->Customer->TenKH }}</p>

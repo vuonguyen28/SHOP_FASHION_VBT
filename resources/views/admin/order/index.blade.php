@@ -33,12 +33,12 @@
 
         }
 
-        .form__filter select{
+        .form__filter select {
             padding: 5px;
             margin-right: 10px;
         }
 
-        .form__filter input{
+        .form__filter input {
             padding: 3px;
             margin-right: 10px;
         }
@@ -87,14 +87,13 @@
         </div>
 
 
-        <div class="table-wrapper">
+        <div class="table-wrapper" style="width:100%">
             <table class="table">
                 <thead class="table-success">
                     <tr>
                         <th>MÃ ĐƠN</th>
                         <th>MÃ KHÁCH HÀNG</th>
                         <th>NGÀY ĐẶT</th>
-                        </th>
                         <th>NGÀY GIAO DỰ KIẾN</th>
                         <th>TỔNG GIÁ</th>
                         <th>TỔNG TIỀN SAU GIẢM</th>
@@ -106,11 +105,12 @@
                         <th>MÃ VOUCHER</th>
                         <th>SỐ ĐIỆN THOẠI</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($orders as $item)
-                        <tr>
+                        <tr style="font-size: 12px">
                             <td>{{ $item->MaDonHang }}</td>
                             <td>{{ $item->MaKhachHang }}</td>
                             <td>{{ $item->NgayDat }}</td>
@@ -124,17 +124,112 @@
                             <td>{{ $item->DiaChiGiaoHang }}</td>
                             <td>{{ $item->MaVoucher }}</td>
                             <td>{{ $item->RecipientPhone }}</td>
+
                             <td>
+                                <form method="POST" action="{{ Route('order.index_DetailOrder') }}">
+                                    @csrf
+                                    <input hidden type="text" value={{ $item->MaDonHang }} name = "id">
+                                    <button class="btn btn-primary" type="submit"><i class='bx bx-wallet'></i></button>
+                                </form>
+                            </td>
+                            {{-- <td>
                                 <form method="POST" action="{{ Route('order.edit') }}">
                                     @csrf
                                     <input hidden type="text" value={{ $item->MaDonHang }} name = "id">
                                     <button class="btn btn-primary" type="submit"><i class='bx bx-edit'></i></button>
                                 </form>
+                            </td> --}}
+                            <td>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#updateAddressModal{{ $item->MaDonHang }}">
+                                    <i class='bx bx-coin-stack'></i>
+                                </button>
                             </td>
+
+
+
+                            {{-- Update Address Modal --}}
+                            <div class="modal" id="updateAddressModal{{ $item->MaDonHang }}">
+                                <div class="modal-dialog">
+                                    <form action="{{ route('order.update') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-content">
+
+                                            {{-- Modal Header --}}
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Cập nhật trạng thái đơn hàng</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <input type="hidden" name="sumTotalMoney" value="">
+                                                <div class="form-group">
+                                                    <label for="MaDonHang{{ $item->MaDonHang }}">Mã Đơn Hàng</label>
+                                                    <input readonly value="{{ $item->MaDonHang }}" name="id"
+                                                        type="text" class="form-control"
+                                                        id="phone{{ $item->MaDonHang }}" placeholder="text">
+                                                </div>
+
+
+                                                <div class="mb-3 mt-3">
+                                                    <label for="TrangThaiDonHang">TRẠNG THÁI ĐƠN HÀNG</label>
+                                                    {{-- <input type="text" name="TrangThaiDonHang" value="{{ $order->TrangThaiDonHang }}" class="form-control" id="TrangThaiDonHang" placeholder="TrangThaiDonHang" required> --}}
+                                                    <select name="TrangThaiDonHang" value="{{ $item->TrangThaiDonHang }}"
+                                                        class="form-control" id="TrangThaiDonHang">
+                                                        <option name="TrangThaiDonHang">ĐÃ GIAO</option>
+                                                        <option name="TrangThaiDonHang">ĐÃ HỦY</option>
+                                                        <option name="TrangThaiDonHang">ĐÃ NHẬN</option>
+                                                        <option name="TrangThaiDonHang">ĐANG GIAO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {{-- Modal Footer --}}
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Update Order</button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                         </tr>
                     @endforeach
+                    @if ($orderDetail->count() != 0)
+
+
+                        <table class="table table-hover">
+                            <thead style="background-color: #cf14a4">
+                                <th>Mã đơn Hàng</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Màu</th>
+                                <th>Size</th>
+                                <th>Gia</th>
+                                <th>SoLuong</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($orderDetail as $detail)
+                                    <tr>
+                                        <td>{{ $detail->MaDonHang }}</td>
+                                        <td>{{ $detail->ProductDetails->Product->TenSP }}</td>
+                                        <td>{{ $detail->ProductDetails->Color->TenMau }}</td>
+                                        <td>{{ $detail->ProductDetails->Size->TenKichThuoc }}</td>
+                                        <td>{{ $detail->Gia }}</td>
+                                        <td>{{ $detail->SoLuong }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+
+
+                    @endif
+
                 </tbody>
             </table>
+
+
         </div>
     </div>
 @endsection

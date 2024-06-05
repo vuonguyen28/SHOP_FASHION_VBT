@@ -134,7 +134,7 @@ $saleVoucher = 0;
                                 <div class="col-md-2 col-sm-2 col-2 d-flex justify-content-center align-items-center"
                                     style="height: 100%">
                                     <div class="cart__details--img">
-                                        <img src="{{  $item['Image'] }}" alt="">
+                                        <img src="{{ $item['Image'] }}" alt="">
                                     </div>
                                 </div>
                                 {{-- details --}}
@@ -174,11 +174,26 @@ $saleVoucher = 0;
                                 <div class="col-md-3 col-sm-3 col-3 d-flex justify-content-center align-items-center"
                                     style="height: 100%">
                                     <div class="cart__details--quantity">
-                                        <button id="btn_reduce">-</button>
+
+
+                                        <form method="POST" action="{{ route('cart.decreaseProductQuantity') }} ">
+                                            @csrf
+                                            <input hidden value="{{ $item['MaSP'] }}" name="MaSP">
+                                            <input hidden value="{{ $item['MaKichThuoc'] }}" name="MaKichThuoc">
+                                            <input hidden value="{{ $item['MaMau'] }}" name="MaMau">
+                                            <button id="btn_reduce">-</button>
+                                        </form>
+
                                         <input type="number" value="{{ $item['SoLuong'] }}" min="1">
-                                        <button class="increase-quantity" data-masp="{{ $item['MaSP'] }}"
-                                            data-makichthuoc="{{ $item['MaKichThuoc'] }}"
-                                            data-mamau="{{ $item['MaMau'] }}" id="btn_increase">+</button>
+
+                                        <form method="POST" action="{{ route('cart.increaseProductQuantity') }} ">
+                                            @csrf
+                                            <input hidden value="{{ $item['MaSP'] }}" name="MaSP">
+                                            <input hidden value="{{ $item['MaKichThuoc'] }}" name="MaKichThuoc">
+                                            <input hidden value="{{ $item['MaMau'] }}" name="MaMau">
+                                            <button class="increase-quantity">+</button>
+                                        </form>
+
                                     </div>
                                 </div>
                                 {{-- total --}}
@@ -251,93 +266,96 @@ $saleVoucher = 0;
                                 <input hidden value="{{ $ShippingMoney }}" name="PhiVanChuyen">
                             </div>
                         </div>
-                         {{-- form xác nhận đặt hàng --}}
-                <div class="row">
-                    <div class="form__confirm">
+                        {{-- form xác nhận đặt hàng --}}
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-6 total__bill--choose">
-                                <p>Tổng tiền (VAT): </p>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-6 d-flex flex-column align-items-end">
-                                <div class="total__pay">
-                                    <p>{{ number_format($ShippingMoney + $sumTotal, 0, ',', '.') }}vnd</p>
-                                    <input type="text" hidden value="{{ $ShippingMoney + $sumTotal }}" name="TongGia">
-                                    <input hidden value="{{ $ShippingMoney + $sumTotal }}" name="TongTienSauKhiGiamGia">
+                            <div class="form__confirm">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-6 total__bill--choose">
+                                        <p>Tổng tiền (VAT): </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-6 d-flex flex-column align-items-end">
+                                        <div class="total__pay">
+                                            <p>{{ number_format($ShippingMoney + $sumTotal, 0, ',', '.') }}vnd</p>
+                                            <input type="text" hidden value="{{ $ShippingMoney + $sumTotal }}"
+                                                name="TongGia">
+                                            <input hidden value="{{ $ShippingMoney + $sumTotal }}"
+                                                name="TongTienSauKhiGiamGia">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4>Hình thức thanh toán</h4>
+                                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                            <form action="{{ route('order.createOrder_WalkInCustomers') }}" method="POST">
+                                                @csrf
+                                                <button type="submit">Khi Nhận Hàng</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                            <form method="POST" action="{{ route('momo.paymentWalkInCustomers') }}">
+                                                @csrf
+                                                <input hidden type="number" name="total_momo"
+                                                    value="{{ (int) $sumTotalMoney + (int) $shippingMoney - (int) $saleVoucher }}">
+                                                <button type="submit"> <img src="{{ asset('images/momologo.png') }}"
+                                                        width="25px">Qua MOMO</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>Hình thức thanh toán</h4>
-                                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                    <form action="{{ route('order.createOrder_WalkInCustomers') }}" method="POST">
-                                        @csrf
-                                        <button type="submit">Khi Nhận Hàng</button>
-                                    </form>
+
+
+                                <br>
+                                <br>
+
+                                <div class="col-md-12 form__deliver--date">
+                                    <div class="col-md-6">
+                                        <h4>Ngày đặt: </h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5> {{ date('d-m-y') }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form__deliver--date">
+                                    <div class="col-md-6">
+                                        <h4>Ngày nhận dự kiến: </h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>{{ date('d-m-y', strtotime('+3 days')) }}</h5>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                                    <form method="POST" action="{{ route('momo.paymentWalkInCustomers') }}">
-                                        @csrf
-                                        <input hidden type="number" name="total_momo"
-                                            value="{{ (int) $sumTotalMoney + (int) $shippingMoney - (int) $saleVoucher }}">
-                                        <button type="submit"> <img src="{{ asset('images/momologo.png') }}"
-                                                width="25px">Qua MOMO</button>
-                                    </form>
+                                <div class="col-md-12 btn__update--info">
+                                    <a href="#" id="myBtn">Cập Nhật Thông tin &nbsp;<i
+                                            class='bx bx-edit'></i></a>
                                 </div>
+
+                                <div class="col-md-6 form__location--locate">
+                                    <input value="{{ session('LoggedName_WalkInCus') }}" placeholder="first name"
+                                        name="TenKH" type="text" required readonly>
+                                </div>
+                                <div class="col-md-6 form__location--locate">
+                                    <input value="{{ session('LoggedPhone_WalkInCus') }}" placeholder="Phone"
+                                        name="RecipientPhone" type="number" required readonly>
+                                </div>
+
+                                <div class="col-md-12 form__location--locate">
+                                    <input value="{{ session('LoggedAddress_WalkInCus') }}" placeholder="Address"
+                                        name="DiaChiNhanHang" type="text" required readonly>
+                                </div>
+
+                                <div class="col-md-12 form__location--locate">
+                                    <input value="{{ session('LoggedEmail_WalkInCus') }}" placeholder="Email"
+                                        name="Email" type="email" required readonly>
+                                </div>
+
                             </div>
                         </div>
-
-
-                        <br>
-                        <br>
-
-                        <div class="col-md-12 form__deliver--date">
-                            <div class="col-md-6">
-                                <h4>Ngày đặt: </h4>
-                            </div>
-                            <div class="col-md-6">
-                                <h5> {{ date('d-m-y') }}</h5>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form__deliver--date">
-                            <div class="col-md-6">
-                                <h4>Ngày nhận dự kiến: </h4>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>{{ date('d-m-y', strtotime('+3 days')) }}</h5>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 btn__update--info">
-                            <a href="#" id="myBtn">Cập Nhật Thông tin &nbsp;<i class='bx bx-edit'></i></a>
-                        </div>
-
-                        <div class="col-md-6 form__location--locate">
-                            <input value="{{ session('LoggedName_WalkInCus') }}" placeholder="first name" name="TenKH"
-                                type="text" required readonly>
-                        </div>
-                        <div class="col-md-6 form__location--locate">
-                            <input value="{{ session('LoggedPhone_WalkInCus') }}" placeholder="Phone"
-                                name="RecipientPhone" type="number" required readonly>
-                        </div>
-
-                        <div class="col-md-12 form__location--locate">
-                            <input value="{{ session('LoggedAddress_WalkInCus') }}" placeholder="Address"
-                                name="DiaChiNhanHang" type="text" required readonly>
-                        </div>
-
-                        <div class="col-md-12 form__location--locate">
-                            <input value="{{ session('LoggedEmail_WalkInCus') }}" placeholder="Email" name="Email"
-                                type="email" required readonly>
-                        </div>
-
                     </div>
                 </div>
-                    </div>
-                </div>
 
 
 
-               
+
 
             </div>
         </div>
@@ -401,7 +419,7 @@ $saleVoucher = 0;
                                     <div class="cart__details--img">
 
                                         @foreach ($cart->ProductDetails->Product->images->take(1) as $image)
-                                            <img src="{{  $image->hinhanh }}" alt="">
+                                            <img src="{{ $image->hinhanh }}" alt="">
                                         @endforeach
                                     </div>
 
@@ -532,8 +550,8 @@ $saleVoucher = 0;
                             </div>
                         </div>
 
-                         {{-- form xác nhận đặt hàng --}}
-                         <div class="row">
+                        {{-- form xác nhận đặt hàng --}}
+                        <div class="row">
                             <div class="form__confirm">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-6">
@@ -592,7 +610,7 @@ $saleVoucher = 0;
                                 </div>
                             </div>
                         </div>
-                        
+
                         {{-- form voucher --}}
                         <div class="row">
                             <div class="form__voucher">
@@ -635,7 +653,7 @@ $saleVoucher = 0;
 
                         </div>
 
-                       
+
 
                         {{-- Ngày giao hàng dự kiến --}}
                         <div class="row">

@@ -195,12 +195,11 @@ class CartsController extends Controller
                 if ($item['MaSP'] == $productInfo['MaSP'] && $item['MaKichThuoc'] == $productInfo['MaKichThuoc'] && $item['MaMau'] == $productInfo['MaMau']) {
                     $cart[$key]['SoLuong']++;
                     Session::put('cart', $cart);
-                    return redirect()->back()->with('success', 'Số lượng sản phẩm đã được tăng lên.');
                 }
             }
         }
 
-        return redirect()->back()->with('error', 'Sản phẩm không tồn tại trong giỏ hàng.');
+        return redirect()->back();
     }
     public function decreaseProductQuantity(Request $request)
     {
@@ -212,23 +211,25 @@ class CartsController extends Controller
 
         if (Session::has('cart')) {
             $cart = Session::get('cart');
+            $check=1;
 
             foreach ($cart as $key => $item) {
                 if ($item['MaSP'] == $productInfo['MaSP'] && $item['MaKichThuoc'] == $productInfo['MaKichThuoc'] && $item['MaMau'] == $productInfo['MaMau']) {
                     $cart[$key]['SoLuong']--;
                     if ($cart[$key]['SoLuong'] <= 0) {
                         unset($cart[$key]);
-                        $message = 'Sản phẩm đã được xóa khỏi giỏ hàng.';
-                    } else {
-                        $message = 'Số lượng sản phẩm đã được giảm xuống.';
-                    }
+                        $check =0;
+                    } 
                     Session::put('cart', $cart);
-                    return redirect()->back()->with('success', $message);
+                    if($check==0)
+                    {
+                        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+                    }
                 }
             }
         }
 
-        return redirect()->back()->with('error', 'Sản phẩm không tồn tại trong giỏ hàng.');
+        return redirect()->back();
     }
 
     public function updateQuantity(Request $request)

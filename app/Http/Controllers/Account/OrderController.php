@@ -276,12 +276,12 @@ class OrderController extends Controller
                     }
 
 
-                   
+
                     // Tạo đơn hàng mới
                     $order = Order::create([
                         'MaKhachHang' => $idCustomer,
-                        'NgayDat' => date('Y-m-d'),
-                        'NgayDuKienGiaoHang' => date('Y-m-d', strtotime('+3 days')),
+                        'NgayDat' => now(),
+                        'NgayDuKienGiaoHang' => now()->addDays(3),
                         'TongGia' => session('pricr_total_cus'),
                         'TongTienSauKhiGiamGia' => 0,
                         'PhiVanChuyen' =>  30000,
@@ -393,12 +393,12 @@ class OrderController extends Controller
             // Tạo đơn hàng mới
             $order = Order::create([
                 'MaKhachHang' => $idCustomer,
-                'NgayDat' => date('Y-m-d'),
-                'NgayDuKienGiaoHang' => date('Y-m-d', strtotime('+3 days')),
+                'NgayDat' => now(),
+                'NgayDuKienGiaoHang' => now()->addDays(3),
                 'TongGia' => $pricr_total,
                 'TongTienSauKhiGiamGia' => 0,
                 'PhiVanChuyen' =>  $prict_shipp,
-                'TrangThaiThanhToan' => '1',
+                'TrangThaiThanhToan' => 'chưa thanh toán',
                 'HinhThucThanhToan' => 'on_delivery',
                 'TrangThaiDonHang' => 'Đã đặt hàng',
                 'DiaChiGiaoHang' => session('LoggedAddress_WalkInCus'),
@@ -515,8 +515,8 @@ class OrderController extends Controller
                     // Tạo đơn hàng mới
                     $order = Order::create([
                         'MaKhachHang' => session('LoggedUser'),
-                        'NgayDat' => date('d-m-y H:i:s'),
-                        'NgayDuKienGiaoHang' => date('d-m-y H:i:s', strtotime('+3 days')),
+                        'NgayDat' => now(),
+                        'NgayDuKienGiaoHang' => now()->addDays(3),
                         'TongGia' => $total,
                         'TongTienSauKhiGiamGia' => session('sumTotalMoney_SALE'),
                         'PhiVanChuyen' => $priceShipping,
@@ -569,12 +569,12 @@ class OrderController extends Controller
         }
     }
 
-    
-   
+
+
     public function CheckOrderForm_WalkInCustomers()
     {
 
-        $check= 0;
+        $check = 0;
         $orders = Order::whereNull('RecipientPhone')->get();
         return view('account.Order.checkOder_WalkInCustomers', [
             'orders' => $orders,
@@ -584,9 +584,9 @@ class OrderController extends Controller
 
     public function SearchBill_WalkInCustomers(Request $request)
     {
-        $check= 0;
+        $check = 0;
         session()->put("phone_search", $request->phone);
-        $orders = Order::where('RecipientPhone',$request->phone)->get();
+        $orders = Order::where('RecipientPhone', $request->phone)->get();
         return view('account.Order.checkOder_WalkInCustomers', [
             'orders' => $orders,
             'check' => $check,
@@ -596,26 +596,26 @@ class OrderController extends Controller
     public function FindOrderDetail_WalkInCustomers(Request $request)
     {
         $check = 1;
-        $orders = Order::where('RecipientPhone',$request->Phone)->take(1)->get();
-        $orderDetail = OrderDetails::where('MaDonHang',$request->ID_ORDER)->get();
+        $orders = Order::where('RecipientPhone', $request->Phone)->take(1)->get();
+        $orderDetail = OrderDetails::where('MaDonHang', $request->ID_ORDER)->get();
         // dd($orderDetail);
         return view('account.Order.checkOder_WalkInCustomers', [
             'orders' => $orders,
-            'orderDetail'=>$orderDetail,
-            'check_show_order_detail'=>'done',
-            'success'=>'hihi',
+            'orderDetail' => $orderDetail,
+            'check_show_order_detail' => 'done',
+            'success' => 'hihi',
             'check' => $check,
         ]);
     }
 
-    
 
 
 
 
 
-    
-    
+
+
+
     public function createOrder(Request $request)
     {
         $userId = session('LoggedUser');
@@ -649,8 +649,8 @@ class OrderController extends Controller
             // Tạo đơn hàng mới
             $order = Order::create([
                 'MaKhachHang' => session('LoggedUser'),
-                'NgayDat' => date('d-m-y H:i:s'),
-                'NgayDuKienGiaoHang' => date('d-m-y H:i:s', strtotime('+3 days')),
+                'NgayDat' => now(),
+                'NgayDuKienGiaoHang' => now()->addDays(3),
                 'TongGia' => $total,
                 'TongTienSauKhiGiamGia' => session('sumTotalMoney_SALE'),
                 'PhiVanChuyen' => $priceShipping,

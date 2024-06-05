@@ -100,6 +100,7 @@ class BillController extends Controller
             ->where('TrangThaiDonHang', 'Đã đặt hàng')
             ->get();
         $orderDetail = OrderDetails::where('MaDonHang', $request->MaDonHang)->get();
+        
         return view('account.Order.ordered_bill', [
             'orders' => $orders,
             'orderDetail' => $orderDetail,
@@ -121,10 +122,12 @@ class BillController extends Controller
             ->where('TrangThaiDonHang', 'ĐÃ HỦY')
             ->get();
         $orderDetail = OrderDetails::where('MaDonHang', $request->MaDonHang)->get();
+       
         return view('account.Order.cancelled_bill', [
             'orders' => $orders,
             'orderDetail' => $orderDetail,
             'check' => '0',
+           
         ]);
     
     }

@@ -47,4 +47,16 @@ class OrderDetails extends Model
     {
         return Order::sum('TongGia');
     }
+
+    public function images()
+    {
+        return $this->hasManyThrough(
+            Image::class,
+            Product::class,
+            'MaSP', // Foreign key on ProductDetails table
+            'MaSP', // Foreign key on Images table
+            'MaChiTietSanPham', // Local key on OrderDetails table
+            'MaSP' // Local key on ProductDetails table
+        );
+    }
 }

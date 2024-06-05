@@ -217,7 +217,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/order/update', [OrderAdminController::class, 'update'])->name('order.update');
 
     Route::post('/order/index',[OrderAdminController::class, 'index'])->name('order.index');
-    
+    Route::post('/order/index_detailOrder',[OrderAdminController::class, 'index'])->name('order.index_DetailOrder');
     
 });
 
@@ -399,5 +399,11 @@ Route::post('/user/ShowProfile_gender', [ProfileController::class, 'editgender']
 
 
 Route::post('/user/ShowProfile_image', [ProfileController::class, 'editimage'])->name('profile.editimage');
+
+
+
+Route::post('/cart/cartAdd',[CartsController::class, 'decreaseProductQuantity'])->name('cart.decreaseProductQuantity');
+Route::post('/cart/increase',[CartsController::class, 'increaseProductQuantity'])->name('cart.increaseProductQuantity');
+
 
 
