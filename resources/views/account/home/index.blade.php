@@ -92,7 +92,7 @@
         </div>
 
         {{-- sản phẩm nổi bật --}}
-        <div class="row frame__trending--product">
+        <div class="row frame__treending--product">
             <div class="col-md-4  title__trending--product show__animate-trending">
                 <p id="trending_title">SẢN PHẨM NỔI BẬT</p>
                 <a id="trending_seemore" href="#">Xem thêm >></a>

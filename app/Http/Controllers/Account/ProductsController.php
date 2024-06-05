@@ -23,6 +23,8 @@ class ProductsController extends Controller
         session()->forget('ProductName');
         $category = Category::all();
         $products = Product::all();
+        
+
         return view('account.products.products', compact('products', 'category'));
     }
 
