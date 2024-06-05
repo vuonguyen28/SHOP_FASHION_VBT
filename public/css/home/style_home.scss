@@ -107,6 +107,7 @@ $orange-color:#F37335;
         margin-right: 10px;
         /* Tạo khoảng cách bên phải giữa các card */
         padding: 10px;
+        animation:  slideNextInfinate 5s linear infinite;
 
         img {
             width: 80%;
@@ -441,5 +442,17 @@ $orange-color:#F37335;
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+
+//hiệu ứng infinate
+@keyframes slideNextInfinate{
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
     }
 }

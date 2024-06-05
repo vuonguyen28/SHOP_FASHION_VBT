@@ -90,6 +90,7 @@
   margin-right: 10px;
   /* Tạo khoảng cách bên phải giữa các card */
   padding: 10px;
+  animation: slideNextInfinate 5s linear infinite;
 }
 .trending__product--slider .trending__product--card img {
   width: 80%;
@@ -358,5 +359,13 @@
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+@keyframes slideNextInfinate {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }/*# sourceMappingURL=style_home.css.map */
