@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Account;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCreated;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -535,7 +537,7 @@ class OrderController extends Controller
                         if (is_null($item->ProductDetails->Product->PhanTramGiamGia)) {
                             $money = $item->ProductDetails->Product->Gia;
                         } else {
-                            $money =$money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100;
+                            $money = $money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100;
                         }
 
                         OrderDetails::create([
@@ -624,6 +626,7 @@ class OrderController extends Controller
         if (!$cartCheck) {
             return redirect()->back()->with('error', 'giỏ hàng đang trống');
         }
+        
 
 
         DB::beginTransaction();
@@ -662,6 +665,10 @@ class OrderController extends Controller
                 'RecipientPhone' => session('LoggedPhone')
             ]);
 
+            $donHangInfo = "Mã đơn hàng: {$order->MaDonHang}, Ngày đặt hàng: {$order->NgayDat}, Địa chỉ giao hàng: {$order->DiaChiGiaoHang}, Tổng giá trị đơn hàng: $total";
+
+            // $donHangInfo = "Mã đơn hàng: $order->MaDonHang, Ngày đặt hàng: $order->NgayDat, Địa chỉ giao hàng: $order->DiaChiGiaoHang, Tổng giá trị đơn hàng: $total";
+            $mess = "Thông tin đơn hàng: ";
 
             // Tạo chi tiết đơn hàng
             foreach ($cartItem as $item) {
@@ -673,13 +680,15 @@ class OrderController extends Controller
                     $money -= ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100;
                 }
 
-                OrderDetails::create([
+                $chitietdonhang = OrderDetails::create([
                     'MaDonHang' => $order->MaDonHang,
                     'MaChiTietSanPham' => $item->MaChiTietSanPham,
                     'SoLuong' =>  $item->SoLuong,
                     'Gia' => $money * $item->SoLuong,
                 ]);
 
+                $chiTietDonHang = "Chi tiết đơn hàng: {$item->MaChiTietSanPham} \n Mã chi tiết sản phẩm: {$item->MaChiTietSanPham} \n số lượng mua {$item->SoLuong} \n Giá Mua: {$item->Gia} ";
+                $mess .= $chiTietDonHang . "; \n";
                 $item->delete();
             }
 
@@ -690,6 +699,15 @@ class OrderController extends Controller
 
             DB::commit();
 
+            //$cartCheck->Email
+            $email = "cr.havaka@gmail.com";
+
+            // Gửi email với thông tin tổng hợp của đơn hàng
+            Mail::raw('THÔNG TIN ĐƠN HÀNG \n'.$donHangInfo .'\n'. $mess, function ($message) use ($email) {
+                $message->to($email)
+                    ->subject('Your New Password');
+            });
+
 
 
             $this->deleteSessionVoucher();
@@ -699,6 +717,91 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Có lỗi khi tạo đơn hàng');
         }
     }
+
+
+    // public function createOrder(Request $request)
+    // {
+    //     $userId = session('LoggedUser');
+    //     $cartCheck = Cart::where('MaKhachHang', $userId)->first();
+
+    //     if (!$cartCheck) {
+    //         return redirect()->back()->with('error', 'Giỏ hàng đang trống');
+    //     }
+
+    //     DB::beginTransaction();
+
+    //     try {
+    //         $cartItems = Cart::where('MaKhachHang', $userId)->get();
+    //         $total = 0;
+    //         $priceShipping = 30000;
+    //         $orderDetails = [];
+
+    //         foreach ($cartItems as $item) {
+    //             $money = $item->ProductDetails->Product->Gia;
+    //             if (!is_null($item->ProductDetails->Product->PhanTramGiamGia)) {
+    //                 $money = ($money - ($money * $item->ProductDetails->Product->PhanTramGiamGia) / 100) * $item->SoLuong;
+    //             } else {
+    //                 $money = $money * $item->SoLuong;
+    //             }
+    //             $total += $money;
+    //             $orderDetails[] = [
+    //                 'Product' => $item->ProductDetails->Product->TenSanPham,
+    //                 'Quantity' => $item->SoLuong,
+    //                 'Price' => $money,
+    //             ];
+    //             $item->delete();
+    //         }
+
+    //         $order = Order::create([
+    //             'MaKhachHang' => $userId,
+    //             'NgayDat' => now(),
+    //             'NgayDuKienGiaoHang' => now()->addDays(3),
+    //             'TongGia' => $total,
+    //             'TongTienSauKhiGiamGia' => session('sumTotalMoney_SALE'),
+    //             'PhiVanChuyen' => $priceShipping,
+    //             'TrangThaiThanhToan' => 'chưa thanh toán',
+    //             'HinhThucThanhToan' => 'on_delivery',
+    //             'TrangThaiDonHang' => 'Đã đặt hàng',
+    //             'DiaChiGiaoHang' => session('LoggedAddress'),
+    //             'MaVoucher' => session('MaVoucher'),
+    //             'RecipientPhone' => session('LoggedPhone')
+    //         ]);
+
+    //         $this->sendOrderEmail('cr.havaka@gmail.com', $order, $orderDetails);
+
+    //         $this->deleteSessionVoucher();
+
+    //         DB::commit();
+
+    //         return redirect()->back()->with('success', 'Đơn hàng đã được tạo thành công.');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         return redirect()->back()->with('error', 'Có lỗi khi tạo đơn hàng');
+    //     }
+    // }
+
+    // public function sendOrderEmail($email, $order, $orderDetails)
+    // {
+    //     try {
+    //         Log::info("Đang gửi email đơn hàng tới: $email", ['order_id' => $order->MaDonHang]);
+
+    //         $emailContent = "Thông tin đơn hàng:\n";
+    //         foreach ($orderDetails as $detail) {
+    //             $emailContent .= "Sản phẩm: {$detail['Product']}, Số lượng: {$detail['Quantity']}, Giá: {$detail['Price']}\n";
+    //         }
+
+    //         Mail::raw($emailContent, function ($message) use ($email) {
+    //             $message->to($email)
+    //                 ->subject('Thông tin đơn hàng của bạn');
+    //         });
+
+    //         Log::info("Đã gửi email đơn hàng thành công.");
+    //     } catch (\Exception $e) {
+    //         Log::error('Lỗi khi gửi email đơn hàng: ' . $e->getMessage());
+    //         throw new \Exception('Có lỗi khi gửi email xác nhận đơn hàng');
+    //     }
+    // }
+
 
 
 

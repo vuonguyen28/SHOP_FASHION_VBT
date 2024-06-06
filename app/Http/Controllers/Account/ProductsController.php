@@ -48,7 +48,7 @@ class ProductsController extends Controller
             // Duyệt qua tất cả các chi tiết đơn hàng của sản phẩm hiện tại
             foreach ($product->productDetails as $productDetail) {
                 // Lấy tất cả các đơn hàng có trạng thái "ĐÃ NHẬN" chứa chi tiết sản phẩm này
-                $orders = $productDetail->orderDetails()->whereHas('donhang', function ($query) {
+                $orders = $productDetail->orderDetails()->whereHas('order', function ($query) {
                     $query->where('TrangThaiDonHang', 'ĐÃ NHẬN');
                 })->get();
 
@@ -57,7 +57,7 @@ class ProductsController extends Controller
             }
 
             // Lưu tổng số lượng đã bán của sản phẩm vào mảng $totalSoldPerProduct
-            $totalSoldPerProduct[$product->id] = $totalSold;
+            $totalSoldPerProduct[$product->MaSP] = $totalSold;
         }
 
         // Sắp xếp mảng $totalSoldPerProduct từ cao đến thấp dựa trên giá trị tổng số lượng đã bán
@@ -67,7 +67,7 @@ class ProductsController extends Controller
         $topProducts = array_slice($totalSoldPerProduct, 0, 8);
 
         // Lấy thông tin chi tiết của các sản phẩm hàng đầu
-        $topProductDetails = Product::whereIn('id', array_keys($topProducts))->get();
+        $topProductDetails = Product::whereIn('MaSP', array_keys($topProducts))->get();
 
         return view('account.products.products', compact('products', 'category', 'topProductDetails'));
     }

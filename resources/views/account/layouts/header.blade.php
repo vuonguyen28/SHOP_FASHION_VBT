@@ -95,7 +95,7 @@
                     </a>
                 </div>
 
-                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" style="font-size: 13px; font-weight:bold;">
                     {{ session('LoggedName') }}
                 </button>
                 <ul class="dropdown-menu">

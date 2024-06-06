@@ -190,7 +190,7 @@
 
                             <div class="form-group form__login--input mb-1">
                                 <label for="confirmpassword">Confirm password:</label>
-                                <input class="form-control fs-6 " type="confirmpassword" id="confirmpassword"
+                                <input class="form-control fs-6 " type="password" id="confirmpassword"
                                     name="confirmPassword_hs5" required>
                                 {{-- <input type="password" class="form-control fs-6 " placeholder="Password"> --}}
                             </div>

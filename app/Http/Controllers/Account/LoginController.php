@@ -19,7 +19,13 @@ class LoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('Password_hs5');
 
+        
+
         $customer = Customer::where('Email', $email)->first();
+
+        if($customer->TrangThai == '0'){
+            return redirect()->back()->with('error', 'Tài khoản đã bị khóa');
+        }
 
         if ($customer) {
             // if(password_verify($password, $customer->Password_hs5)) { // này kiểm tra passwword mã hõa

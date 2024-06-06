@@ -174,12 +174,12 @@
         </li>
     @endforeach --}}
 
-    @foreach ($topProducts as $product)
+    {{-- @foreach ($topProducts as $product)
         <li>
             <h3>{{ $product->TenSP }}</h3>
             <img src="{{ $product->HinhAnh }}" alt="{{ $product->TenSP }}">
         </li>
-    @endforeach
+    @endforeach --}}
 
 @endsection
 {{--  end section content --}}
